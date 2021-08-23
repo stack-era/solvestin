@@ -3,8 +3,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import SideNav from "../modules/SideNav/SideNav";
 import withAuthentication from "../hoc/ProtectedRoute";
+import Dashboard from "../modules/Dashboard/Dashboard";
 
-const Dashboard: NextPage = () => {
+const dashboard: NextPage = () => {
   return (
     <div className="w-screen h-screen overflow-hidden bg-[#141417] text-white antialiased">
       <Head>
@@ -16,7 +17,7 @@ const Dashboard: NextPage = () => {
         <div className="w-[6%]  border-r border-[#2B2B2E]  ">
           <SideNav />
         </div>
-        <div className="w-[90%] ">
+        <div className="w-[94%] ">
           <Dashboard />
         </div>
       </div>
@@ -24,4 +25,4 @@ const Dashboard: NextPage = () => {
   );
 };
 
-export default withAuthentication(Dashboard);
+export default withAuthentication(dashboard);

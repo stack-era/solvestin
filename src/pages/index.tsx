@@ -26,7 +26,7 @@ const Home: NextPage = () => {
         <div className="w-[6%]  border-r border-[#2B2B2E]  ">
           <SideNav />
         </div>
-        <div className="w-[90%] ">
+        <div className="w-[94%] ">
           <Login />
         </div>
       </div>

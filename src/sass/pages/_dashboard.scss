@@ -1,0 +1,35 @@
+.__dashboard {
+  &-input-bg {
+    background: linear-gradient(
+      125.57deg,
+      rgba(255, 255, 255, 0.2) -211.9%,
+      rgba(255, 255, 255, 0) 128.55%
+    );
+    backdrop-filter: blur(11.4786px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 10px;
+  }
+  &_statistics-bg {
+    background: linear-gradient(
+      125.86deg,
+      rgba(255, 255, 255, 0.2) -267.85%,
+      rgba(255, 255, 255, 0) 138.29%
+    );
+    backdrop-filter: blur(11.4786px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 12px;
+  }
+  &_statistics-card-bg {
+    background: linear-gradient(
+      125.86deg,
+      rgba(255, 255, 255, 0.007) -267.85%,
+      rgba(0, 0, 0, 0.26) 138.29%
+    );
+    backdrop-filter: blur(11.4786px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 12px;
+  }
+}
