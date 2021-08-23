@@ -4,8 +4,11 @@ import SolletIcon from "../../assets/icons/Sollet-icon.svg";
 import PhantomIcon from "../../assets/icons/Phantom-icon.svg";
 import SolflareIcon from "../../assets/icons/Solflare-icon.svg";
 import SolanaVectorIcon from "../../assets/icons/Solana-vector-icon.svg";
+import { useAuthContext } from "../../auth/authContext";
+
 
 const Login = () => {
+  const { setAuthentication } = useAuthContext();
   return (
     <div className=" flex flex-col justify-center items-center  mt-10 ">
       <div className="flex flex-col items-center">
@@ -19,8 +22,11 @@ const Login = () => {
         <h3 className="font-bold text-lg __login-caption">
           Login to start investing with Solana{" "}
         </h3>
-        <button className="flex items-center justify-center  pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#FFB84F] to-[#FF374E] rounded-lg __login-button-title font-bold text-lg tracking-wide ">
-          <div className="flex place-content-center h-12 w-12  cursor-pointer">
+        <button
+          className="flex items-center justify-center  pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#FFB84F] to-[#FF374E] rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer active:opacity-70 "
+          onClick={() => setAuthentication(true)}
+        >
+          <div className="flex place-content-center h-12 w-12  ">
             <Image
               src={SolletIcon}
               alt="Sollet Icon"
@@ -31,7 +37,7 @@ const Login = () => {
           </div>
           LOGIN WITH SOLLET
         </button>
-        <button className="flex items-center justify-center pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#C9FF56] to-[#0CE255] rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer">
+        <button className="flex items-center justify-center pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#C9FF56] to-[#0CE255] rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer active:opacity-70">
           <div className="flex place-content-center h-12 w-12  ">
             <Image
               src={PhantomIcon}
@@ -43,7 +49,7 @@ const Login = () => {
           </div>
           LOGIN WITH PHANTOM
         </button>
-        <button className="flex items-center justify-center pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#AB78FF] to-[#4F4AFF] rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer">
+        <button className="flex items-center justify-center pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#AB78FF] to-[#4F4AFF] rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer active:opacity-70">
           <div className="flex place-content-center h-12 w-12  ">
             <Image
               src={SolflareIcon}
