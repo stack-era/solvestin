@@ -10,7 +10,7 @@ import { useAuthContext } from "../../auth/authContext";
 const Login = () => {
   const { setAuthentication } = useAuthContext();
   return (
-    <div className=" flex flex-col justify-center items-center  mt-10 ">
+    <div className="relative flex flex-col justify-center items-center  mt-10 ">
       <div className="flex flex-col items-center">
         <p className="font-bold text-5xl __login-title"> SolVesting </p>
         <p className="text-xs mt-3 text-gray-500">
@@ -62,7 +62,7 @@ const Login = () => {
           LOGIN WITH SOLFLARE
         </button>
       </div>
-      <div className="relative -top-72 -right-80 z-0">
+      <div className="absolute bottom-[-26rem] right-24 z-0">
         <Image
           src={SolanaVectorIcon}
           alt="Sollet Icon"

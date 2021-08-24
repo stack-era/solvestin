@@ -12,7 +12,7 @@ const Statistics = () => {
             <Image src={SolSicon} alt="Dashboard Icon" width={20} height={20} />
           </div>
           <div className="__text-cario py-7">
-            <h3 className="text-2xl font-bold ">$8.779,58</h3>
+            <h3 className="text-3xl font-bold ">$8.779,58</h3>
             <h6 className="text-sm font-thin">Portfolio Total</h6>
           </div>
           <button className="__text-cario bg-gradient-to-b from-[#EECB4E] to-[#FC3205] w-[9rem] h-10 rounded-lg">

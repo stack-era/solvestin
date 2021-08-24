@@ -32,4 +32,26 @@
 
     border-radius: 12px;
   }
+  &_allInvestments-token-bg {
+    background: linear-gradient(
+      125.86deg,
+      rgba(255, 255, 255, 0.18) -267.85%,
+      rgba(255, 255, 255, 0) 138.29%
+    );
+    backdrop-filter: blur(11.4786px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 12px;
+  }
+  &_allInvestments-transactions-bg {
+    background: linear-gradient(
+      130.79deg,
+      rgba(255, 255, 255, 0.08) -37.1%,
+      rgba(255, 255, 255, 0) 134.47%
+    );
+    backdrop-filter: blur(11.4786px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 12px;
+  }
 }
