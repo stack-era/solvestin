@@ -4,8 +4,10 @@ import SolanaIcon from "../../../assets/icons/Solana-holdings-icon.svg";
 import SerumIcon from "../../../assets/icons/Serum-holdings-icon.svg";
 import RediyumIcon from "../../../assets/icons/Rediyum-holdings-icon.svg";
 import SolanaSIcon from "../../../assets/icons/Sol-S-icon.svg";
+import { useShowBucketsContext } from "../../../hooks/ShowBucketsContext";
 
 const Holdings = () => {
+  const { showBuckets, setShowBuckets } = useShowBucketsContext();
   return (
     <div className="bg-[#1f1f22] h-screen ml-11 rounded-tl-3xl">
       <div className="__text-cario flex items-center gap-5 p-6">
@@ -82,31 +84,48 @@ const Holdings = () => {
           </div>
         </div>
       </div>
-      <div className="__text-cario relative  rounded-xl border border-[#394445] mx-7 mt-72 ">
-        <div className="p-5 ">
-          <h2 className="font-bold text-2xl">Streaming Investments</h2>
-          <p className="font-semibold text-gray-500">
-            Get started with streaming investments on SolVest.
-          </p>
-          <p className="font-semibold text-gray-500 mt-5 ">
-            Create Daily, Weekly, Monthly Streams to invest in <br /> auto-mode
-            with SolVest Investment Buckets.
-          </p>
+      {showBuckets ? (
+        <div className="">
+          <div className="absolute  bottom-8 right-8 opacity-40 ">
+            <Image
+              src={SolanaSIcon}
+              alt="Dashboard Icon"
+              width={115}
+              height={115}
+              className=""
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="__text-cario relative  rounded-xl border border-[#394445] mx-7 mt-72 ">
+          <div className="p-5 ">
+            <h2 className="font-bold text-2xl">Streaming Investments</h2>
+            <p className="font-semibold text-gray-500">
+              Get started with streaming investments on SolVest.
+            </p>
+            <p className="font-semibold text-gray-500 mt-5 ">
+              Create Daily, Weekly, Monthly Streams to invest in <br />{" "}
+              auto-mode with SolVest Investment Buckets.
+            </p>
 
-          <button className="rounded-xl px-3 mt-9 w-48 h-14 bg-gradient-to-b from-[#00FFF0] to-[#0066FE] font-semibold text-lg ">
-            INVEST NOW
-          </button>
+            <button
+              className="rounded-xl px-3 mt-9 w-48 h-14 bg-gradient-to-b from-[#00FFF0] to-[#0066FE] font-semibold text-lg "
+              onClick={() => setShowBuckets(true)}
+            >
+              INVEST NOW
+            </button>
+          </div>
+          <div className="absolute  bottom-0 right-2 opacity-40 ">
+            <Image
+              src={SolanaSIcon}
+              alt="Dashboard Icon"
+              width={115}
+              height={115}
+              className=""
+            />
+          </div>
         </div>
-        <div className="absolute  bottom-0 right-2 opacity-40 ">
-          <Image
-            src={SolanaSIcon}
-            alt="Dashboard Icon"
-            width={115}
-            height={115}
-            className=""
-          />
-        </div>
-      </div>
+      )}
     </div>
   );
 };

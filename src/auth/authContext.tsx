@@ -12,7 +12,7 @@ const AuthContext = createContext<Context>({
 });
 
 const AuthContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [isAuthenticated, setAuthentication] = useState(true);
+  const [isAuthenticated, setAuthentication] = useState(false);
   // console.log(isAuthenticated)
   return (
     <AuthContext.Provider
