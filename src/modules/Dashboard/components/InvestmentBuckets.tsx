@@ -1,16 +1,20 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import RightArrow from "../../../assets/icons/Right-arrow-icon.svg";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
 import RedArrow from "../../../assets/icons/Red-Arrow-icon.svg";
 
 const Buckets = () => {
+  const router = useRouter();
   return (
     <div className="__text-cario ml-6 mt-12">
       <>
         <div className="flex justify-between">
           <div className="">
-            <h2 className="font-bold text-xl">Investment Buckets</h2>
+            <h2 className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-b from-[#EE4EE8] to-[#FAA08A]">
+              Investment Buckets
+            </h2>
             <h6 className="text-xs opacity-50">
               Now invest in Investment Buckets with Solana
             </h6>
@@ -21,7 +25,10 @@ const Buckets = () => {
         </div>
         <div className="">
           <div className="flex flex-nowrap mt-5 gap-5 ">
-            <div className=" w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3">
+            <div
+              className=" w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3 cursor-pointer "
+              onClick={() => router.push("/tokens/token1")}
+            >
               <div className="flex items-center justify-between">
                 <h3 className="font-bold text-lg">SolBucks Token 1</h3>
                 <div className="  ">

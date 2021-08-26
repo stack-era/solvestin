@@ -1,13 +1,16 @@
 import React from "react";
 import Image from "next/image";
-import SolanaIcon from "../../../assets/icons/Solana-holdings-icon.svg";
-import SerumIcon from "../../../assets/icons/Serum-holdings-icon.svg";
-import RediyumIcon from "../../../assets/icons/Rediyum-holdings-icon.svg";
-import SolanaSIcon from "../../../assets/icons/Sol-S-icon.svg";
-import { useShowBucketsContext } from "../../../hooks/ShowBucketsContext";
+import SolanaIcon from "../assets/icons/Solana-holdings-icon.svg";
+import SerumIcon from "../assets/icons/Serum-holdings-icon.svg";
+import RediyumIcon from "../assets/icons/Rediyum-holdings-icon.svg";
+import SolanaSIcon from "../assets/icons/Sol-S-icon.svg";
+import { useShowBucketsContext } from "../hooks/ShowBucketsContext";
 
-const Holdings = () => {
+interface HoldingsProps {}
+
+const Holdings: React.FC<HoldingsProps> = () => {
   const { showBuckets, setShowBuckets } = useShowBucketsContext();
+
   return (
     <div className="bg-[#1f1f22] h-screen ml-11 rounded-tl-3xl">
       <div className="__text-cario flex items-center gap-5 p-6">

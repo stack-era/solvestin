@@ -1,19 +1,22 @@
 import React from "react";
+import SearchBar from "../../components/SearchBar";
 import Image from "next/image";
+import Holdings from "../../components/Holdings";
 import BellIcon from "../../assets/icons/Bell-icon.svg";
 import AvatarIcon from "../../assets/icons/Avatar-icon.svg";
 import DownArrow from "../../assets/icons/Down-Arrow-icon.svg";
-import Statistics from "./components/Statistics";
-import Holdings from "../../components/Holdings";
-import Chart from "./components/Chart";
-import Allinvestments from "./components/Allinvestments";
-import InvestmentBuckets from "./components/InvestmentBuckets";
 import { ShowBucketsContext } from "../../hooks/ShowBucketsContext";
 import { useState } from "react";
-import SearchBar from "../../components/SearchBar";
+import Statistics from "./components/Statistics";
+import Chart from "./components/Chart";
+import InvestmentDistribution from "./components/InvestmentDistribution";
 
-const Dashboard: React.FC = () => {
-  const [showBuckets, setShowBuckets] = useState<boolean>(false);
+interface TokensDashboardProps {
+  token: any | undefined;
+}
+
+const TokensDashboard: React.FC<TokensDashboardProps> = ({ token }) => {
+  const [showBuckets, setShowBuckets] = useState<boolean>(true);
   return (
     <ShowBucketsContext.Provider value={{ showBuckets, setShowBuckets }}>
       <div>
@@ -21,14 +24,8 @@ const Dashboard: React.FC = () => {
           <div className="w-[70%]">
             <SearchBar />
             <Statistics />
-            {showBuckets ? (
-              <InvestmentBuckets />
-            ) : (
-              <>
-                <Chart />
-                <Allinvestments />
-              </>
-            )}
+            <Chart />
+            <InvestmentDistribution />
           </div>
           <div className="w-[30%] ">
             <div className=" flex items-center justify-end gap-5 mt-4 mx-9 p-3 ">
@@ -78,4 +75,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default TokensDashboard;

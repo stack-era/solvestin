@@ -1,0 +1,14 @@
+.__tokens {
+  &_statistics-card-bg {
+    background: linear-gradient(
+      131.94deg,
+      rgba(255, 255, 255, 0.08) -22.88%,
+      rgba(255, 255, 255, 0.01) 91.76%
+    );
+    opacity: 0.9;
+    backdrop-filter: blur(11.4786px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 12px;
+  }
+}

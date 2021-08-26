@@ -29,7 +29,7 @@ const Statistics = () => {
               </h2>
               <Image
                 src={GreenIcon}
-                alt="Dashboard Icon"
+                alt="Dashboard Icon"  
                 width={22}
                 height={20}
               />
