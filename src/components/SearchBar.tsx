@@ -10,9 +10,7 @@ const SearchBar = () => {
             <h2 className="__text-cario font-bold text-xl bg-clip-text text-transparent bg-gradient-to-b from-[#EE4EE8] to-[#FAA08A]">
               Get started with Investing
             </h2>
-            <h6 className="__text-cario text-xs font-thin">
-              Now invest in Investment Buckets with Solana
-            </h6>
+        
           </div>
           <div className="__dashboard-input-bg flex items-center gap-2 ml-28   h-12 mt-7 p-3 opacity-70 border border-[#333335]">
             <Image

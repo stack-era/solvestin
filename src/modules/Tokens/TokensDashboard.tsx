@@ -10,6 +10,8 @@ import { useState } from "react";
 import Statistics from "./components/Statistics";
 import Chart from "./components/Chart";
 import InvestmentDistribution from "./components/InvestmentDistribution";
+import StreamingInvestment from "./components/StreamingInvestment";
+import HistoryTables from "./components/HistoryTables";
 
 interface TokensDashboardProps {
   token: any | undefined;
@@ -26,6 +28,8 @@ const TokensDashboard: React.FC<TokensDashboardProps> = ({ token }) => {
             <Statistics />
             <Chart />
             <InvestmentDistribution />
+            <StreamingInvestment />
+            <HistoryTables />
           </div>
           <div className="w-[30%] ">
             <div className=" flex items-center justify-end gap-5 mt-4 mx-9 p-3 ">

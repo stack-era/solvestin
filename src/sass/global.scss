@@ -4,6 +4,7 @@
 @tailwind utilities;
 
 /// utils
+@import "abstracts/mixins";
 @import "abstracts/typography";
 
 /// components
@@ -13,3 +14,14 @@
 @import "pages/login";
 @import "pages/dashboard";
 @import "pages/tokens";
+
+
+
+body {
+  @include scrollbars(5px, rgb(49, 49, 49), rgb(117, 117, 117));
+}
+
+
+// body{
+//    @include no-scroll-bar()
+// }

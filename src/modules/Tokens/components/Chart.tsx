@@ -65,17 +65,29 @@ const options = {
 const Chart = () => {
   return (
     <div className="   ml-6 mt-4 p-5   rounded-2xl ">
-      <h1 className="text-center __text-cario font-bold text-3xl ">
-        SolBucks Token 1
-      </h1>
-      <div className="flex items-baseline justify-center gap-2 my-3 ">
-        <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
-          $40.15
-        </h2>
-        <Image src={GreenIcon} alt="Dashboard Icon" width={12} height={10} />
-        <h5 className="text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A]">
-          + 6.7%
-        </h5>
+      <div className="flex">
+        <div className="ml-[42%]">
+          <h1 className="text-center __text-cario font-bold text-3xl ">
+            SolBucks Token 1
+          </h1>
+          <div className="flex items-baseline justify-center gap-2 my-3 ">
+            <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
+              $40.15
+            </h2>
+            <Image
+              src={GreenIcon}
+              alt="Dashboard Icon"
+              width={12}
+              height={10}
+            />
+            <h5 className="text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A]">
+              + 6.7%
+            </h5>
+          </div>
+        </div>
+        <button className="w-[103px] h-[62px] bg-gradient-to-b from-[#5C8FFF] to-[#7B78FF] rounded-md ml-[20%]  font-bold text-gray-800 __text-cario">
+          ADD TO WALLET
+        </button>
       </div>
       <h6 className="text-center text-xs __text-cario mb-3">
         The investment distribution of the token based on percentage{" "}

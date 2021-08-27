@@ -2,8 +2,10 @@ import React from "react";
 import Image from "next/image";
 import SolSicon from "../../../assets/icons/Sol-S-icon.svg";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
+import { useShowBucketsContext } from "../../../hooks/ShowBucketsContext";
 
 const Statistics = () => {
+   const { showBuckets, setShowBuckets } = useShowBucketsContext();
   return (
     <div className="__dashboard_statistics-bg   border border-[#333335] ml-6 mt-4 pr-4">
       <div className="grid grid-cols-3">
@@ -15,9 +17,11 @@ const Statistics = () => {
             <h3 className="text-3xl font-bold ">$8.779,58</h3>
             <h6 className="text-sm font-thin">Portfolio Total</h6>
           </div>
-          <button className="__text-cario bg-gradient-to-b from-[#EECB4E] to-[#FC3205] w-[9rem] h-10 rounded-lg">
-            View Breakdown
-          </button>
+          {showBuckets ? null : (
+            <button className="__text-cario bg-gradient-to-b from-[#EECB4E] to-[#FC3205] w-[9rem] h-10 rounded-lg">
+              View Breakdown
+            </button>
+          )}
         </div>
         <div className="flex flex-col p-4">
           <h3 className="__text-cario font-semibold text-xl">Statistics</h3>
@@ -29,7 +33,7 @@ const Statistics = () => {
               </h2>
               <Image
                 src={GreenIcon}
-                alt="Dashboard Icon"  
+                alt="Dashboard Icon"
                 width={22}
                 height={20}
               />
