@@ -11,9 +11,7 @@ const Buckets = () => {
   const router = useRouter();
      const { activeWindow, setActiveWindow } = useActiveWindowContext();
 
-  useEffect(() => {
-    setActiveWindow("discover");
-  }, []);
+
   return (
     <div className="__text-cario ml-6 mt-12">
       <>

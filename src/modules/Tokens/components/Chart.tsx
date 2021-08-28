@@ -2,6 +2,8 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 import Image from "next/image";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
+import { useActiveWindowContext } from "../../../hooks/ActiveWindowContext";
+import { useEffect } from 'react';
 
 const data = {
   labels: [
@@ -63,6 +65,7 @@ const options = {
 };
 
 const Chart = () => {
+   
   return (
     <div className="   ml-6 mt-4 p-5   rounded-2xl ">
       <div className="flex">

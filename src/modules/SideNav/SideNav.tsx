@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import LogoIcon from "../../assets/icons/Logo-icon.svg";
 import DashboardIcon from "../../assets/icons/Dashboard-icon.svg";
 import DiscoverIcon from "../../assets/icons/Discover-icon.svg";
@@ -9,12 +10,17 @@ import ScheduleIcon from "../../assets/icons/Schedule-icon.svg";
 import ReportIcon from "../../assets/icons/Report-icon.svg";
 import SettingsIcon from "../../assets/icons/Settings-icon.svg";
 import LogOutIcon from "../../assets/icons/Logout-icon.svg";
+import { useShowBucketsContext } from "../../hooks/ShowBucketsContext";
+import { useActiveWindowContext } from "../../hooks/ActiveWindowContext";
 
 const SideNav = () => {
-  const [activeWindow, setActiveWindow] = useState("dashboard");
+  const router = useRouter();
+  const { activeWindow, setActiveWindow } = useActiveWindowContext();
+  const { showBuckets, setShowBuckets } = useShowBucketsContext();
+
   return (
-    <div className="w-full flex flex-col items-center mt-10">
-      <div className="flex cursor-pointer">
+    <div className="w-full  flex flex-col items-center mt-10">
+      <div className="flex cursor-pointer" onClick={() => router.push("/")}>
         <Image src={LogoIcon} alt="Logo Icon" layout="intrinsic" />
       </div>
       <div className="flex flex-col justify-between">
@@ -25,7 +31,11 @@ const SideNav = () => {
                 ? "rounded-full bg-gradient-to-b from-[#DB55EC] to-[#8873FC] "
                 : ""
             }`}
-            onClick={() => setActiveWindow("dashboard")}
+            onClick={() => {
+              router.push("/dashboard");
+              setActiveWindow("dashboard");
+              setShowBuckets(false);
+            }}
           >
             <Image
               src={DashboardIcon}
@@ -39,7 +49,11 @@ const SideNav = () => {
                 ? "rounded-full bg-gradient-to-b from-[#DB55EC] to-[#8873FC] "
                 : ""
             }`}
-            onClick={() => setActiveWindow("discover")}
+            onClick={() => {
+               router.push("/buckets");
+              setActiveWindow("discover");
+              setShowBuckets(true);
+            }}
           >
             <Image src={DiscoverIcon} alt="Dashboard Icon" layout="intrinsic" />
           </div>
@@ -49,7 +63,11 @@ const SideNav = () => {
                 ? "rounded-full bg-gradient-to-b from-[#DB55EC] to-[#8873FC] "
                 : ""
             }`}
-            onClick={() => setActiveWindow("payment")}
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveWindow("payment");
+              router.push("/tokens/token1");
+            }}
           >
             <Image src={PaymentIcon} alt="Dashboard Icon" layout="intrinsic" />
           </div>

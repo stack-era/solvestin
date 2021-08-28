@@ -7,10 +7,11 @@ import Dashboard from "../modules/Dashboard/Dashboard";
 import { ShowBucketsContext } from "../hooks/ShowBucketsContext";
 import { useState } from "react";
 import { ActiveWindowContext } from "../hooks/ActiveWindowContext";
+import AllBuckets from "../modules/Buckets/AllBuckets";
 
-const dashboard: NextPage = () => {
-  const [showBuckets, setShowBuckets] = useState<boolean>(false);
-  const [activeWindow, setActiveWindow] = useState("dashboard");
+const buckets: NextPage = () => {
+  const [showBuckets, setShowBuckets] = useState<boolean>(true);
+  const [activeWindow, setActiveWindow] = useState("discover");
   return (
     <ShowBucketsContext.Provider value={{ showBuckets, setShowBuckets }}>
       <ActiveWindowContext.Provider value={{ activeWindow, setActiveWindow }}>
@@ -25,7 +26,7 @@ const dashboard: NextPage = () => {
               <SideNav />
             </div>
             <div className="w-[94%] ">
-              <Dashboard />
+              <AllBuckets/>
             </div>
           </div>
         </div>
@@ -34,4 +35,4 @@ const dashboard: NextPage = () => {
   );
 };
 
-export default withAuthentication(dashboard);
+export default withAuthentication(buckets);

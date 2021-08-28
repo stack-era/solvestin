@@ -11,4 +11,7 @@
 
     border-radius: 12px;
   }
+  &_tokensDashboard-hide-scroll {
+    @include no-scroll-bar();
+  }
 }

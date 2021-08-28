@@ -1,20 +1,16 @@
 import React from "react";
 
-import Statistics from "./components/Statistics";
 import Holdings from "../../components/Holdings";
-import Chart from "./components/Chart";
-import Allinvestments from "./components/Allinvestments";
-import InvestmentBuckets from "./components/InvestmentBuckets";
+
 import { useShowBucketsContext } from "../../hooks/ShowBucketsContext";
 
 import SearchBar from "../../components/SearchBar";
 import { useEffect } from "react";
 import { useActiveWindowContext } from "../../hooks/ActiveWindowContext";
+import Statistics from "../Dashboard/components/Statistics";
+import InvestmentBuckets from "./components/InvestmentBuckets";
 
-const Dashboard: React.FC = () => {
-  const { showBuckets, setShowBuckets } = useShowBucketsContext();
-  const { activeWindow, setActiveWindow } = useActiveWindowContext();
-
+const AllBuckets = () => {
   return (
     <div>
       <div className="flex">
@@ -22,8 +18,7 @@ const Dashboard: React.FC = () => {
           <SearchBar />
           <Statistics />
 
-          <Chart />
-          <Allinvestments />
+          <InvestmentBuckets />
         </div>
         <div className="w-[30%] ">
           <Holdings />
@@ -33,4 +28,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default AllBuckets;
