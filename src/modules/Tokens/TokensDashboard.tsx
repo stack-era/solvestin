@@ -17,20 +17,17 @@ interface TokensDashboardProps {
 
 const TokensDashboard: React.FC<TokensDashboardProps> = ({ token }) => {
   return (
-    <div className="" >
-      <div className="flex">
-        <div className="__tokens_tokensDashboard-hide-scroll w-[70%] overflow-y-scroll h-[100vh] pb-20 ">
-          <SearchBar />
-          <Statistics />
-          <Chart />
-          <InvestmentDistribution />
-          <StreamingInvestment />
-          <HistoryTables />
-        </div>
-        <div className="w-[30%]  ">
-         
-          <Holdings />
-        </div>
+    <div className="flex ">
+      <div className="__tokens_tokensDashboard-hide-scroll w-[70%] overflow-y-scroll h-[100vh]  ">
+        <SearchBar />
+        <Statistics />
+        <Chart />
+        <InvestmentDistribution />
+        <StreamingInvestment />
+        <HistoryTables />
+      </div>
+      <div className="w-[30%]  ">
+        <Holdings />
       </div>
     </div>
   );

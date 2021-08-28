@@ -52,7 +52,7 @@ const Holdings: React.FC<HoldingsProps> = () => {
           />
         </div>
       </div>
-      <div className="bg-[#1f1f22] h-screen overflow-y-hidden  ml-11 rounded-tl-3xl">
+      <div className="bg-[#1f1f22] h-screen   ml-11 rounded-tl-3xl">
         <div className="__text-cario flex items-center gap-5 p-6">
           <h2 className="font-bold text-xl">Your Holdings</h2>
           <h5 className="text-center w-8 h-5 text-sm font-bold rounded-2xl bg-[#51B56D]">

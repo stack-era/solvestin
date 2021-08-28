@@ -17,15 +17,15 @@ const Dashboard: React.FC = () => {
 
   return (
     <div>
-      <div className="flex">
-        <div className="w-[70%]">
+      <div className="flex  ">
+        <div className="w-[70%] ">
           <SearchBar />
           <Statistics />
 
           <Chart />
           <Allinvestments />
         </div>
-        <div className="w-[30%] ">
+        <div className="w-[30%]   ">
           <Holdings />
         </div>
       </div>

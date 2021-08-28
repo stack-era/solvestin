@@ -50,7 +50,7 @@ const SideNav = () => {
                 : ""
             }`}
             onClick={() => {
-               router.push("/buckets");
+              router.push("/buckets");
               setActiveWindow("discover");
               setShowBuckets(true);
             }}
@@ -77,7 +77,10 @@ const SideNav = () => {
                 ? "rounded-full bg-gradient-to-b from-[#DB55EC] to-[#8873FC] "
                 : ""
             }`}
-            onClick={() => setActiveWindow("chat")}
+            onClick={() => {
+              setActiveWindow("chat");
+              router.push("/profile");
+            }}
           >
             <Image src={ChatIcon} alt="Dashboard Icon" layout="intrinsic" />
           </div>
