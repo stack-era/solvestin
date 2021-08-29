@@ -1,4 +1,9 @@
-import React from "react";
+import React, {
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useMemo,
+} from "react";
 import Image from "next/image";
 import SolletIcon from "../../assets/icons/Sollet-icon.svg";
 import PhantomIcon from "../../assets/icons/Phantom-icon.svg";
@@ -6,6 +11,8 @@ import SolflareIcon from "../../assets/icons/Solflare-icon.svg";
 import SolanaVectorIcon from "../../assets/icons/Solana-vector-icon.svg";
 import { useAuthContext } from "../../auth/authContext";
 
+import { useWallet } from "@solana/wallet-adapter-react";
+import { WalletName } from "@solana/wallet-adapter-wallets";
 
 const Login = () => {
   const { setAuthentication } = useAuthContext();
@@ -22,34 +29,7 @@ const Login = () => {
         <h3 className="font-bold text-lg __login-caption">
           Login to start investing with Solana{" "}
         </h3>
-        <button
-          className="flex items-center justify-center  pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#FFB84F] to-[#FF374E] rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer active:opacity-70 "
-          onClick={() => setAuthentication(true)}
-        >
-          <div className="flex place-content-center h-12 w-12  ">
-            <Image
-              src={SolletIcon}
-              alt="Sollet Icon"
-              width={23}
-              height={23}
-              layout="intrinsic"
-            />
-          </div>
-          LOGIN WITH SOLLET
-        </button>
-        <button className="flex items-center justify-center pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#C9FF56] to-[#0CE255] rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer active:opacity-70">
-          <div className="flex place-content-center h-12 w-12  ">
-            <Image
-              src={PhantomIcon}
-              alt="Sollet Icon"
-              width={23}
-              height={23}
-              layout="intrinsic"
-            />
-          </div>
-          LOGIN WITH PHANTOM
-        </button>
-        <button className="flex items-center justify-center pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#AB78FF] to-[#4F4AFF] rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer active:opacity-70">
+        {/* <button className="flex items-center justify-center pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#AB78FF] to-[#4F4AFF] rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer active:opacity-70">
           <div className="flex place-content-center h-12 w-12  ">
             <Image
               src={SolflareIcon}
@@ -60,7 +40,8 @@ const Login = () => {
             />
           </div>
           LOGIN WITH SOLFLARE
-        </button>
+        </button> */}
+        <WalletButtons />
       </div>
       <div className="absolute bottom-[-26rem] right-24 z-0">
         <Image
@@ -75,3 +56,86 @@ const Login = () => {
 };
 
 export default Login;
+
+const WalletButtons = () => {
+  const { wallets } = useWallet();
+  return (
+    <>
+      {wallets.map((wal, index) => {
+        return <SingleWalletButton key={index} wallet={wal} />;
+      })}
+    </>
+  );
+};
+
+interface ISingleWalletButton {
+  wallet: {
+    name: WalletName;
+    icon: string;
+  };
+  // onClick: (e: MouseEventHandler<HTMLDivElement>) => void;
+}
+const SingleWalletButton = (props: ISingleWalletButton) => {
+  const { wallet } = props;
+  const { adapter } = useWallet();
+  const { setAuthentication } = useAuthContext();
+  // const history = useHistory();
+  const { select } = useWallet();
+  const content = useMemo(() => {
+    if (adapter?.connecting) return "Connecting ...";
+    if (adapter?.connected) return "Connected";
+    if (wallet) return `login with ${wallet.name}`;
+    return "Connect Wallet";
+  }, [adapter, wallet]);
+  const handleClick: MouseEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      select(wallet.name);
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      if (!event.defaultPrevented)
+        adapter
+          ?.connect()
+          .then(() => {
+            console.log("in then");
+            setAuthentication(true);
+            // history.push("/dashboard");
+            console.log(adapter.publicKey?.toBase58());
+          })
+          .catch((error) => {
+            console.log("error here", error);
+          });
+    },
+    []
+  );
+  // useEffect(() => {
+  //   const fetchAndSetPbAddress = async () => {
+  //     // console.log("pb", publicKey?.toString());
+  //     // const pbKey: string = await publicKey?.toString();
+  //     // setLocalStorage(pbKey);
+  //     // setPublicAddress(publicKey?.toString());
+  //     // history.push("/dashboard");
+  //   };
+  //   if (adapter?.connected) {
+  //     fetchAndSetPbAddress();
+  //   }
+  // }, [adapter?.connected]);
+  return (
+    <div onClick={handleClick} className="my-4">
+      <button
+        className={`flex items-center justify-center  pr-6 w-[404px] h-[61px]  rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer active:opacity-70 bg-gradient-to-b 
+        ${wallet.name === "Sollet" && " from-[#FFB84F] to-[#FF374E]"} 
+         ${wallet.name === "Phantom" && " from-[#C9FF56] to-[#0CE255]"} `}
+      >
+        <div className="flex place-content-center h-7 w-12  ">
+          <Image
+            src={wallet.icon}
+            alt="Sollet Icon"
+            width={23}
+            height={19}
+            layout="intrinsic"
+          />
+        </div>
+        LOGIN WITH <span className="uppercase ml-1">{wallet.name} </span>
+      </button>
+    </div>
+  );
+};

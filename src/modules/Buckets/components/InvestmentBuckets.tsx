@@ -5,7 +5,7 @@ import RightArrow from "../../../assets/icons/Right-arrow-icon.svg";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
 import RedArrow from "../../../assets/icons/Red-Arrow-icon.svg";
 import { useActiveWindowContext } from "../../../hooks/ActiveWindowContext";
-import { useEffect } from 'react';
+
 
 const Buckets = () => {
   const router = useRouter();
