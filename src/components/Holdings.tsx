@@ -9,12 +9,18 @@ import AvatarIcon from "../assets/icons/Avatar-icon.svg";
 import DownArrow from "../assets/icons/Down-Arrow-icon.svg";
 import { useShowBucketsContext } from "../hooks/ShowBucketsContext";
 import { useRouter } from "next/router";
+import axios from "axios";
+import { useEffect } from "react";
+import { useQuery } from "react-query";
+import { getHoldings } from "../helpers/get";
 
 interface HoldingsProps {}
 
 const Holdings: React.FC<HoldingsProps> = () => {
   const router = useRouter();
   const { showBuckets, setShowBuckets } = useShowBucketsContext();
+
+  const { isLoading, error, data, isFetching } = getHoldings();
 
   return (
     <>
@@ -56,12 +62,51 @@ const Holdings: React.FC<HoldingsProps> = () => {
         <div className="__text-cario flex items-center gap-5 p-6">
           <h2 className="font-bold text-xl">Your Holdings</h2>
           <h5 className="text-center w-8 h-5 text-sm font-bold rounded-2xl bg-[#51B56D]">
-            {" "}
-            3{" "}
+            {data?.length}
           </h5>
         </div>
-        <div className="grid grid-flow-row gap-8">
-          <div className="flex items-center justify-between px-7">
+        <div className="__hide-scrollbar grid grid-flow-row gap-8 overflow-y-scroll h-[50%] ">
+          {!isLoading &&
+            data.map((token: any, index: any) => (
+              <div
+                className="flex items-center justify-between px-7"
+                key={index}
+              >
+                <div className="flex items-center gap-5">
+                  <div className=" bg-black rounded-full flex place-content-center w-14 h-10">
+                    {token.tokenIcon !== "" ? (
+                      <Image
+                        src={token.tokenIcon}
+                        alt="Dashboard Icon"
+                        width={60}
+                        height={20}
+                      />
+                    ) : null}
+                  </div>
+                  <div className="flex flex-col __text-cario w-full">
+                    <h2 className="font-bold text-lg">
+                      {token.tokenName} ({token.tokenSymbol})
+                    </h2>
+                    <h6 className="text-gray-300 text-lg font-semibold ">
+                      {token.tokenAmountUI}
+                    </h6>
+                  </div>
+                </div>
+                <div className="flex flex-col items-end w-[37%]">
+                  <h2 className="text-lg">${token.priceUsdt}</h2>
+                  {token.todayChange.toFixed(4) > 0 ? (
+                    <h4 className="text-green-600">
+                      + ${token.todayChange.toFixed(4)}
+                    </h4>
+                  ) : (
+                    <h4 className="text-red-600">
+                      - ${token.todayChange.toFixed(4)}
+                    </h4>
+                  )}
+                </div>
+              </div>
+            ))}
+          {/* <div className="flex items-center justify-between px-7">
             <div className="flex items-center gap-5">
               <div className=" bg-black rounded-full flex place-content-center w-12 h-12">
                 <Image
@@ -83,8 +128,8 @@ const Holdings: React.FC<HoldingsProps> = () => {
               <h2 className="text-lg">$189.00</h2>
               <h4 className="text-green-600">+ $21.41 (1.25%)</h4>
             </div>
-          </div>
-          <div className="flex items-center justify-between px-7">
+          </div> */}
+          {/* <div className="flex items-center justify-between px-7">
             <div className="flex items-center gap-5">
               <div className=" bg-black rounded-full flex place-content-center w-12 h-12">
                 <Image
@@ -129,7 +174,7 @@ const Holdings: React.FC<HoldingsProps> = () => {
               <h2 className="text-xl">$11,289.00</h2>
               <h4 className="text-red-600">- $511.41 (12.25%)</h4>
             </div>
-          </div>
+          </div> */}
         </div>
         {showBuckets ? (
           <div className="">
@@ -144,7 +189,7 @@ const Holdings: React.FC<HoldingsProps> = () => {
             </div>
           </div>
         ) : (
-          <div className="__text-cario relative  rounded-xl border border-[#394445] mx-7 mt-72 ">
+          <div className="__text-cario relative  rounded-xl border border-[#394445] mx-7 mt-7 ">
             <div className="p-5 ">
               <h2 className="font-bold text-2xl">Streaming Investments</h2>
               <p className="font-semibold text-gray-500">

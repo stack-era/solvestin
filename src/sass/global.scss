@@ -19,6 +19,9 @@ body {
   @include scrollbars(5px, rgb(49, 49, 49), rgb(117, 117, 117));
 }
 
+.__hide-scrollbar {
+  @include no-scroll-bar();
+}
 // body{
 //    @include no-scroll-bar()
 // }

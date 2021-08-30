@@ -5,12 +5,21 @@ import SideNav from "../modules/SideNav/SideNav";
 import withAuthentication from "../hoc/ProtectedRoute";
 import Dashboard from "../modules/Dashboard/Dashboard";
 import { ShowBucketsContext } from "../hooks/ShowBucketsContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ActiveWindowContext } from "../hooks/ActiveWindowContext";
+import axios from "axios";
 
 const dashboard: NextPage = () => {
   const [showBuckets, setShowBuckets] = useState<boolean>(false);
   const [activeWindow, setActiveWindow] = useState("dashboard");
+  useEffect(() => {
+    axios
+      .post(
+        "http://194.163.160.51:7000/api/update_balances_in_db?key=Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"
+      )
+      .then((response) => console.log("DB Updated", response.data.message))
+      .catch((err) => console.log("DB Error", err));
+  }, []);
   return (
     <ShowBucketsContext.Provider value={{ showBuckets, setShowBuckets }}>
       <ActiveWindowContext.Provider value={{ activeWindow, setActiveWindow }}>

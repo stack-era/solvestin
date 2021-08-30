@@ -13,6 +13,7 @@ import { useAuthContext } from "../../auth/authContext";
 
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletName } from "@solana/wallet-adapter-wallets";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Login = () => {
   const { setAuthentication } = useAuthContext();
@@ -79,14 +80,19 @@ const SingleWalletButton = (props: ISingleWalletButton) => {
   const { wallet } = props;
   const { adapter } = useWallet();
   const { setAuthentication } = useAuthContext();
+
+  const [publicKey, setPublikKey] = useLocalStorage("publicKey", "null");
+
   // const history = useHistory();
   const { select } = useWallet();
+
   const content = useMemo(() => {
     if (adapter?.connecting) return "Connecting ...";
     if (adapter?.connected) return "Connected";
     if (wallet) return `login with ${wallet.name}`;
     return "Connect Wallet";
   }, [adapter, wallet]);
+
   const handleClick: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
       select(wallet.name);
@@ -98,7 +104,11 @@ const SingleWalletButton = (props: ISingleWalletButton) => {
             console.log("in then");
             setAuthentication(true);
             // history.push("/dashboard");
-            console.log(adapter.publicKey?.toBase58());
+            // console.log("key login", adapter.publicKey?.toBase58());
+
+            if (adapter.publicKey) {
+              setPublikKey(adapter.publicKey?.toBase58());
+            }
           })
           .catch((error) => {
             console.log("error here", error);
@@ -106,6 +116,7 @@ const SingleWalletButton = (props: ISingleWalletButton) => {
     },
     []
   );
+
   // useEffect(() => {
   //   const fetchAndSetPbAddress = async () => {
   //     // console.log("pb", publicKey?.toString());

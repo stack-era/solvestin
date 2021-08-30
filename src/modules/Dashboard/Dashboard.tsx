@@ -11,9 +11,12 @@ import SearchBar from "../../components/SearchBar";
 import { useEffect } from "react";
 import { useActiveWindowContext } from "../../hooks/ActiveWindowContext";
 
+
 const Dashboard: React.FC = () => {
   const { showBuckets, setShowBuckets } = useShowBucketsContext();
   const { activeWindow, setActiveWindow } = useActiveWindowContext();
+
+
 
   return (
     <div>
