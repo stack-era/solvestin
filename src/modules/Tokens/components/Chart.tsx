@@ -3,9 +3,10 @@ import { Line } from "react-chartjs-2";
 import Image from "next/image";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
 import { useActiveWindowContext } from "../../../hooks/ActiveWindowContext";
+import { getOneSolvestTokens } from "../../../helpers/get";
+import { useRouter } from "next/router";
 
-
-const data = {
+const Chartdata = {
   labels: [
     "Jan",
     "Feb",
@@ -65,17 +66,25 @@ const options = {
 };
 
 const Chart = () => {
-   
+  const router = useRouter();
+  const { token } = router.query;
+
+
+  const { isLoading, error, data, isFetching } = getOneSolvestTokens(
+    parseInt(token as string)
+  );
+  // console.log(data);
+
   return (
     <div className="   ml-6 mt-4 p-5   rounded-2xl ">
       <div className="flex">
         <div className="ml-[42%]">
           <h1 className="text-center __text-cario font-bold text-3xl ">
-            SolBucks Token 1
+            {!isLoading && data && data[0].name}
           </h1>
           <div className="flex items-baseline justify-center gap-2 my-3 ">
             <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
-              $40.15
+              $ {!isLoading && data && data[0].price.toFixed(2)}
             </h2>
             <Image
               src={GreenIcon}
@@ -96,7 +105,7 @@ const Chart = () => {
         The investment distribution of the token based on percentage{" "}
       </h6>
       <div className=" w-full ">
-        <Line data={data} options={options} height={70} />
+        <Line data={Chartdata} options={options} height={70} />
       </div>
     </div>
   );

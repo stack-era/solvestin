@@ -64,9 +64,8 @@ const SideNav = () => {
                 : ""
             }`}
             onClick={(e) => {
-              e.preventDefault();
-              setActiveWindow("payment");
-              router.push("/tokens/token1");
+              router.push(`/tokens/${1}`);
+              // setActiveWindow("payment");
             }}
           >
             <Image src={PaymentIcon} alt="Dashboard Icon" layout="intrinsic" />

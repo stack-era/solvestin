@@ -14,6 +14,7 @@ import { useAuthContext } from "../../auth/authContext";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletName } from "@solana/wallet-adapter-wallets";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import axios from "axios";
 
 const Login = () => {
   const { setAuthentication } = useAuthContext();
@@ -108,6 +109,14 @@ const SingleWalletButton = (props: ISingleWalletButton) => {
 
             if (adapter.publicKey) {
               setPublikKey(adapter.publicKey?.toBase58());
+              axios
+                .post(
+                  `http://194.163.160.51:7000/api/save_userKey?key=${adapter.publicKey?.toBase58()}`
+                )
+                .then((response) =>
+                  console.log("save user publickey", response.data.message)
+                )
+                .catch((err) => console.log("save user publickey Error", err));
             }
           })
           .catch((error) => {

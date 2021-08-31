@@ -3,9 +3,36 @@ import Image from "next/image";
 import SolSicon from "../../../assets/icons/Sol-S-icon.svg";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
 import { useShowBucketsContext } from "../../../hooks/ShowBucketsContext";
+import { getHoldings } from "../../../helpers/get";
 
 const Statistics = () => {
-   const { showBuckets, setShowBuckets } = useShowBucketsContext();
+  const { showBuckets, setShowBuckets } = useShowBucketsContext();
+  const { isLoading, error, data, isFetching } = getHoldings();
+
+  let sumOfPrices;
+  let last24hrs;
+  let addTotalChanges;
+
+  if (!isLoading) {
+    const totalPrices = data.map(
+      (token: any) => token.priceUsdt * token.tokenAmountUI
+    );
+    // console.log(totalPrices);
+    sumOfPrices = totalPrices.reduce(function (accumulator: any, current: any) {
+      return accumulator + current;
+    });
+    // console.log(sumOfPrices.toFixed(2));
+    const totalChanges = data.map((token: any) => token.todayChange);
+    addTotalChanges = totalChanges.reduce(function (
+      accumulator: any,
+      current: any
+    ) {
+      return accumulator + current;
+    });
+    // console.log(addTotalChanges * (sumOfPrices / 100));
+    last24hrs = addTotalChanges * (sumOfPrices / 100);
+  }
+
   return (
     <div className="__dashboard_statistics-bg   border border-[#333335] ml-6 mt-4 pr-4">
       <div className="grid grid-cols-3">
@@ -14,7 +41,9 @@ const Statistics = () => {
             <Image src={SolSicon} alt="Dashboard Icon" width={20} height={20} />
           </div>
           <div className="__text-cario py-7">
-            <h3 className="text-3xl font-bold ">$8.779,58</h3>
+            <h3 className="text-3xl font-bold ">
+              ${!isLoading && sumOfPrices && sumOfPrices.toFixed(2)}
+            </h3>
             <h6 className="text-sm font-thin">Portfolio Total</h6>
           </div>
           {showBuckets ? null : (
@@ -29,7 +58,7 @@ const Statistics = () => {
             <h5 className="text-lg font-bold">Last 24 hours</h5>
             <div className="flex items-baseline gap-2">
               <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
-                $120.15
+                ${!isLoading && last24hrs && last24hrs.toFixed(2)}
               </h2>
               <Image
                 src={GreenIcon}
@@ -37,7 +66,9 @@ const Statistics = () => {
                 width={22}
                 height={20}
               />
-              <h5 className="text-xl font-semibold">+ 6.7%</h5>
+              <h5 className="text-xl font-semibold">
+                +{addTotalChanges && addTotalChanges.toFixed(2)}%
+              </h5>
             </div>
             <div className="relative pt-3">
               <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-[#39393b]">

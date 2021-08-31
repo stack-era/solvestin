@@ -21,6 +21,7 @@ const Holdings: React.FC<HoldingsProps> = () => {
   const { showBuckets, setShowBuckets } = useShowBucketsContext();
 
   const { isLoading, error, data, isFetching } = getHoldings();
+  const nf = new Intl.NumberFormat();
 
   return (
     <>
@@ -93,7 +94,9 @@ const Holdings: React.FC<HoldingsProps> = () => {
                   </div>
                 </div>
                 <div className="flex flex-col items-end w-[37%]">
-                  <h2 className="text-lg">${token.priceUsdt}</h2>
+                  <h2 className="text-lg">
+                    ${nf.format(token.priceUsdt * token.tokenAmountUI)}
+                  </h2>
                   {token.todayChange.toFixed(4) > 0 ? (
                     <h4 className="text-green-600">
                       + ${token.todayChange.toFixed(4)}

@@ -61,7 +61,7 @@ const InvestmentDistribution = () => {
             BUY SOLBUCKS 1
           </button>
           <button className="rounded-lg text-black font-bold __text-cario text-xl capitalize bg-gradient-to-b from-[#DD5E36]  to-[#E17979] p-2 w-[18rem] ">
-            BUY SOLBUCKS 1
+            SEll SOLBUCKS 1
           </button>
         </div>
       </div>
