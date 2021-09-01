@@ -89,9 +89,9 @@ export function getStreams() {
 export function getTokenTransactions() {
   //   const publicKey = useReadLocalStorage("publicKey");
   //   console.log("publicKey", publicKey);
-  return useQuery("streams", async () => {
+  return useQuery("trans", async () => {
     const { data } = await axios.get(
-      "http://194.163.160.51:7000/api/get_token_transactions?address=Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"
+      "http://194.163.160.51:7000/api/get_token_transactions?address=So11111111111111111111111111111111111111112&limit=20&offset=0"
     );
     return data;
   });

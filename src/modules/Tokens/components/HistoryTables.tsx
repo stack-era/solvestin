@@ -1,6 +1,13 @@
 import React from "react";
+import { getTokenTransactions } from "../../../helpers/get";
 
 const HistoryTables = () => {
+  const { isLoading, error, data: trans, isFetching } = getTokenTransactions();
+  // console.log(isLoading, isFetching, data);
+
+  let current = Date.now();
+  let date2: any = new Date(current);
+
   return (
     <>
       <div>
@@ -62,67 +69,44 @@ const HistoryTables = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-[#232323] font-bold text-sm ">
-              <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
-              <td className="text-center">42 minutes ago</td>
-              <td className="text-center">3FNZvUQQ6VGc33bt…</td>
-              <td className="text-center"> 3j98nUNpX6kA6jSj…</td>
-              <td className="text-center"> 100 SOLBUCKS</td>
-              <td className="text-center">
-                <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
-                  Success
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-[#26262d33] font-bold text-sm ">
-              <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
-              <td className="text-center">42 minutes ago</td>
-              <td className="text-center">3FNZvUQQ6VGc33bt…</td>
-              <td className="text-center"> 3j98nUNpX6kA6jSj…</td>
-              <td className="text-center"> 100 SOLBUCKS</td>
-              <td className="text-center">
-                <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
-                  Success
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-[#232323] font-bold text-sm ">
-              <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
-              <td className="text-center">42 minutes ago</td>
-              <td className="text-center">3FNZvUQQ6VGc33bt…</td>
-              <td className="text-center"> 3j98nUNpX6kA6jSj…</td>
-              <td className="text-center"> 100 SOLBUCKS</td>
-              <td className="text-center">
-                <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
-                  Success
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-[#26262d33] font-bold text-sm ">
-              <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
-              <td className="text-center">42 minutes ago</td>
-              <td className="text-center">3FNZvUQQ6VGc33bt…</td>
-              <td className="text-center"> 3j98nUNpX6kA6jSj…</td>
-              <td className="text-center"> 100 SOLBUCKS</td>
-              <td className="text-center">
-                <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
-                  Success
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-[#232323] font-bold text-sm ">
-              <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
-              <td className="text-center">42 minutes ago</td>
-              <td className="text-center">3FNZvUQQ6VGc33bt…</td>
-              <td className="text-center"> 3j98nUNpX6kA6jSj…</td>
-              <td className="text-center"> 100 SOLBUCKS</td>
-              <td className="text-center">
-                <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
-                  Success
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-[#26262d33] font-bold text-sm ">
+            {!isLoading &&
+              trans &&
+              trans.map((tran: any, index: any) => (
+                <tr
+                  key={tran.id}
+                  className={`${
+                    (index + 1) % 2 === 0 ? "bg-[#232323]" : "bg-[#26262d33]"
+                  } font-bold text-sm `}
+                >
+                  <td className="p-3 truncate max-w-[3rem] ">
+                    {tran.transactionhash}
+                  </td>
+                  <td className="text-center">
+                    {Math.floor(
+                      Math.abs(tran.timestamp.relative - date2) / 1000 / 60
+                    ) % 60}{" "}
+                    minutes ago
+                  </td>
+                  <td className="text-center truncate max-w-[3rem]">
+                    {tran.source.address}
+                  </td>
+                  <td className="text-center truncate max-w-[3rem]">
+                    {" "}
+                    {tran.destination.address}
+                  </td>
+                  <td className="text-center">
+                    {" "}
+                    {(tran.amount / (10 * tran.decimals)).toFixed(2)} SOLBUCKS
+                  </td>
+                  <td className="text-center">
+                    <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
+                      Success
+                    </button>
+                  </td>
+                </tr>
+              ))}
+
+            {/* <tr className="bg-[#26262d33] font-bold text-sm ">
               <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
               <td className="text-center">42 minutes ago</td>
               <td className="text-center">3FNZvUQQ6VGc33bt…</td>
@@ -278,6 +262,54 @@ const HistoryTables = () => {
                 </button>
               </td>
             </tr>
+            <tr className="bg-[#232323] font-bold text-sm ">
+              <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
+              <td className="text-center">42 minutes ago</td>
+              <td className="text-center">3FNZvUQQ6VGc33bt…</td>
+              <td className="text-center"> 3j98nUNpX6kA6jSj…</td>
+              <td className="text-center"> 100 SOLBUCKS</td>
+              <td className="text-center">
+                <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
+                  Success
+                </button>
+              </td>
+            </tr>
+            <tr className="bg-[#26262d33] font-bold text-sm ">
+              <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
+              <td className="text-center">42 minutes ago</td>
+              <td className="text-center">3FNZvUQQ6VGc33bt…</td>
+              <td className="text-center"> 3j98nUNpX6kA6jSj…</td>
+              <td className="text-center"> 100 SOLBUCKS</td>
+              <td className="text-center">
+                <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
+                  Success
+                </button>
+              </td>
+            </tr>
+            <tr className="bg-[#232323] font-bold text-sm ">
+              <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
+              <td className="text-center">42 minutes ago</td>
+              <td className="text-center">3FNZvUQQ6VGc33bt…</td>
+              <td className="text-center"> 3j98nUNpX6kA6jSj…</td>
+              <td className="text-center"> 100 SOLBUCKS</td>
+              <td className="text-center">
+                <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
+                  Success
+                </button>
+              </td>
+            </tr>
+            <tr className="bg-[#26262d33] font-bold text-sm ">
+              <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
+              <td className="text-center">42 minutes ago</td>
+              <td className="text-center">3FNZvUQQ6VGc33bt…</td>
+              <td className="text-center"> 3j98nUNpX6kA6jSj…</td>
+              <td className="text-center"> 100 SOLBUCKS</td>
+              <td className="text-center">
+                <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
+                  Success
+                </button>
+              </td>
+            </tr> */}
           </tbody>
         </table>
       </div>

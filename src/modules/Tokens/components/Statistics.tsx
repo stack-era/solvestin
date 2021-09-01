@@ -7,12 +7,14 @@ import { getHoldings } from "../../../helpers/get";
 const Statistics = () => {
   const { isLoading, error, data, isFetching } = getHoldings();
 
+
   let sumOfPrices;
   let last24hrs;
   let addTotalChanges;
+  let weeklyChange;
 
-  if (!isLoading) {
-    const totalPrices = data.map(
+  if (!isLoading && !error) {
+    const totalPrices = data.data.map(
       (token: any) => token.priceUsdt * token.tokenAmountUI
     );
     // console.log(totalPrices);
@@ -20,7 +22,7 @@ const Statistics = () => {
       return accumulator + current;
     });
     // console.log(sumOfPrices.toFixed(2));
-    const totalChanges = data.map((token: any) => token.todayChange);
+    const totalChanges = data.data.map((token: any) => token.todayChange);
     addTotalChanges = totalChanges.reduce(function (
       accumulator: any,
       current: any
@@ -29,6 +31,7 @@ const Statistics = () => {
     });
     // console.log(addTotalChanges * (sumOfPrices / 100));
     last24hrs = addTotalChanges * (sumOfPrices / 100);
+    weeklyChange = data.weekly[0].weekChange * (sumOfPrices / 100);
   }
   return (
     <div className="flex items-center gap-10 ml-6 mt-7">
@@ -69,10 +72,16 @@ const Statistics = () => {
       <div className=" __tokens_statistics-card-bg rounded-xl  __text-cario   mt-2 p-3 px-7 space-y-3">
         <div className="flex items-baseline gap-2">
           <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
-            $120.15
+            ${" "}
+            {!isLoading &&
+              data.weekly[0].weekChange &&
+              weeklyChange &&
+              weeklyChange.toFixed(2)}
           </h2>
           <Image src={GreenIcon} alt="Dashboard Icon" width={22} height={20} />
-          <h5 className="text-xl font-semibold">+ 6.7%</h5>
+          <h5 className="text-xl font-semibold">
+            + { !isLoading && data.weekly[0].weekChange.toFixed(2)}%
+          </h5>
         </div>
 
         <h3 className="text-gray-400 __text-cario text-sm font-medium">

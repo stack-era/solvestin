@@ -2,75 +2,69 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 import Image from "next/image";
 import SolidDownArrow from "../../../assets/icons/Solid-Down-Arrow-icon.svg";
-import BitcoinIcon from "../../../assets/icons/Bitcoin-icon.svg"
-
-const data = {
-  labels: [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [40, 40, 30, 10, 10, 10, 10, 48, 40, 30, 20, 20],
-      fill: false,
-      backgroundColor: "#524EEE",
-      borderColor: "#534eeeb0",
-    },
-    {
-      label: "2 of Votes",
-      data: [22, 22, 30, 38, 30, 29, 38, 38, 28, 28, 45, 45],
-      fill: false,
-      backgroundColor: "#FD6A3C",
-      borderColor: "#fd693cc3",
-    },
-  ],
-};
-
-const options = {
-  scales: {
-    x: {
-      grid: {
-        display: false,
-        color: "#52525265",
-      },
-      ticks: {
-        color: "#ffffff",
-      },
-    },
-    y: {
-      grid: {
-        display: true,
-        color: "#52525263",
-      },
-      min: 5,
-      max: 50,
-      ticks: {
-        // forces step size to be 50 units
-        stepSize: 10,
-        color: "#999999",
-      },
-    },
-  },
-
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-};
+import BitcoinIcon from "../../../assets/icons/Bitcoin-icon.svg";
+import { getUsersHistoricalPortfolio } from "../../../helpers/get";
 
 const Chart = () => {
+  const {
+    isLoading,
+    error,
+    data: portfilio,
+    isFetching,
+  } = getUsersHistoricalPortfolio();
+
+  let performance;
+  let lables1;
+  if (!isLoading && portfilio) {
+    lables1 = Object.keys(portfilio.data);
+    performance = Object.values(portfilio.data);
+  }
+
+  const data = {
+    labels: lables1,
+    datasets: [
+      {
+        label: "# of Votes",
+        data: performance,
+        fill: false,
+        backgroundColor: "#524EEE",
+        borderColor: "#534eeeb0",
+      },
+    ],
+  };
+
+  const options = {
+    scales: {
+      x: {
+        grid: {
+          display: false,
+          color: "#52525265",
+        },
+        ticks: {
+          color: "#ffffff",
+        },
+      },
+      y: {
+        grid: {
+          display: true,
+          color: "#52525263",
+        },
+        // min: 5,
+        // max: 50,
+        // ticks: {
+        //   // forces step size to be 50 units
+        //   stepSize: 10,
+        //   color: "#999999",
+        // },
+      },
+    },
+
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
   return (
     <div className="__dashboard_chart-bg flex  ml-6 mt-4 p-5  border border-[#333335] bg-gradient-to-r from-[#1a1a1d] to-[#151518] bg-opacity-5 rounded-2xl ">
       <div className=" w-[65%]   ">

@@ -66,50 +66,52 @@ const Holdings: React.FC<HoldingsProps> = () => {
             {data?.length}
           </h5>
         </div>
-        <div className="__hide-scrollbar grid grid-flow-row gap-8 overflow-y-scroll h-[50%] ">
-          {!isLoading &&
-            data.map((token: any, index: any) => (
-              <div
-                className="flex items-center justify-between px-7"
-                key={index}
-              >
-                <div className="flex items-center gap-5">
-                  <div className=" bg-black rounded-full flex place-content-center w-14 h-10">
-                    {token.tokenIcon !== "" ? (
-                      <Image
-                        src={token.tokenIcon}
-                        alt="Dashboard Icon"
-                        width={60}
-                        height={20}
-                      />
-                    ) : null}
+        <div className="__hide-scrollbar overflow-y-scroll h-[50%]">
+          <div className=" grid grid-flow-row gap-8  px-7 ">
+            {!isLoading &&
+              data.data.map((token: any, index: any) => (
+                <div
+                  className="flex items-center justify-between mx-4 "
+                  key={index}
+                >
+                  <div className="flex items-center gap-5">
+                    <div className=" bg-black rounded-full flex place-content-center w-14 h-10">
+                      {token.tokenIcon !== "" ? (
+                        <Image
+                          src={token.tokenIcon}
+                          alt="Dashboard Icon"
+                          width={60}
+                          height={20}
+                        />
+                      ) : null}
+                    </div>
+                    <div className="flex flex-col __text-cario w-full">
+                      <h2 className="font-bold text-lg">
+                        {token.tokenName} ({token.tokenSymbol})
+                      </h2>
+                      <h6 className="text-gray-300 text-lg font-semibold ">
+                        {token.tokenAmountUI}
+                      </h6>
+                    </div>
                   </div>
-                  <div className="flex flex-col __text-cario w-full">
-                    <h2 className="font-bold text-lg">
-                      {token.tokenName} ({token.tokenSymbol})
+                  <div className="flex flex-col items-end w-[37%]">
+                    <h2 className="text-lg">
+                      ${nf.format(token.priceUsdt * token.tokenAmountUI)}
                     </h2>
-                    <h6 className="text-gray-300 text-lg font-semibold ">
-                      {token.tokenAmountUI}
-                    </h6>
+                    {token.todayChange.toFixed(4) > 0 ? (
+                      <h4 className="text-green-600">
+                        + ${token.todayChange.toFixed(4)}
+                      </h4>
+                    ) : (
+                      <h4 className="text-red-600">
+                        - ${token.todayChange.toFixed(4)}
+                      </h4>
+                    )}
                   </div>
                 </div>
-                <div className="flex flex-col items-end w-[37%]">
-                  <h2 className="text-lg">
-                    ${nf.format(token.priceUsdt * token.tokenAmountUI)}
-                  </h2>
-                  {token.todayChange.toFixed(4) > 0 ? (
-                    <h4 className="text-green-600">
-                      + ${token.todayChange.toFixed(4)}
-                    </h4>
-                  ) : (
-                    <h4 className="text-red-600">
-                      - ${token.todayChange.toFixed(4)}
-                    </h4>
-                  )}
-                </div>
-              </div>
-            ))}
-          {/* <div className="flex items-center justify-between px-7">
+              ))}
+
+            {/* <div className="flex items-center justify-between px-7">
             <div className="flex items-center gap-5">
               <div className=" bg-black rounded-full flex place-content-center w-12 h-12">
                 <Image
@@ -132,7 +134,7 @@ const Holdings: React.FC<HoldingsProps> = () => {
               <h4 className="text-green-600">+ $21.41 (1.25%)</h4>
             </div>
           </div> */}
-          {/* <div className="flex items-center justify-between px-7">
+            {/* <div className="flex items-center justify-between px-7">
             <div className="flex items-center gap-5">
               <div className=" bg-black rounded-full flex place-content-center w-12 h-12">
                 <Image
@@ -178,6 +180,7 @@ const Holdings: React.FC<HoldingsProps> = () => {
               <h4 className="text-red-600">- $511.41 (12.25%)</h4>
             </div>
           </div> */}
+          </div>
         </div>
         {showBuckets ? (
           <div className="">

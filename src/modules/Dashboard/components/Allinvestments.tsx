@@ -1,6 +1,9 @@
 import React from "react";
 
+
 const Allinvestments = () => {
+
+ 
   return (
     <div className="__text-cario flex mt-6 ml-6 ">
       <div className="w-[30%] ">
@@ -60,12 +63,14 @@ const Allinvestments = () => {
               </div>
               <h6 className="text-xl text-[#FF374E] mt-1">- $49.59</h6>
             </div>
-            <h3 className="text-sm opacity-50 text-center underline cursor-pointer">See all transactions</h3>
+            <h3 className="text-sm opacity-50 text-center underline cursor-pointer">
+              See all transactions
+            </h3>
           </div>
         </div>
       </div>
     </div>
-  ); 
+  );
 };
 
 export default Allinvestments;
