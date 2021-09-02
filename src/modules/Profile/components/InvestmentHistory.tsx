@@ -1,6 +1,13 @@
 import React from 'react'
+import { getUsersSolvestTransactions } from '../../../helpers/get';
 
 const InvestmentHistory = () => {
+    const {
+      isLoading: isUserTransLoading,
+      error: UserTransError,
+      data: UserTrans,
+      isFetching: isUserTransFeatching,
+    } = getUsersSolvestTransactions();
     return (
       <div>
         <h2 className="__text-cario font-bold text-2xl mt-14 text-center bg-clip-text text-transparent bg-gradient-to-b from-[#EE4EE8] to-[#FAA08A]">
@@ -18,7 +25,34 @@ const InvestmentHistory = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-[#232323] font-bold text-sm ">
+            {!isUserTransLoading &&
+              UserTrans &&
+              UserTrans.map((trans: any, index: any) => (
+                <tr key={index} className="bg-[#232323] font-bold text-sm ">
+                  <td className="p-3 max-w-[3rem] truncate">
+                    {trans.transactionId}
+                  </td>
+                  <td className="text-center">2 minutes ago</td>
+                  <td className="text-center max-w-[3rem] truncate">
+                    {trans.source}
+                  </td>
+                  <td className="text-center max-w-[3rem] truncate">
+                    {" "}
+                    {trans.destination}
+                  </td>
+                  <td className="text-center">
+                    {" "}
+                    {trans.quantity.toFixed(2)} {trans.symbol}
+                  </td>
+                  <td className="text-center">
+                    <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
+                      Success
+                    </button>
+                  </td>
+                </tr>
+              ))}
+
+            {/* <tr className="bg-[#26262d33] font-bold text-sm ">
               <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
               <td className="text-center">2 minutes ago</td>
               <td className="text-center">3FNZvUQQ6VGc33bt…</td>
@@ -29,19 +63,7 @@ const InvestmentHistory = () => {
                   Success
                 </button>
               </td>
-            </tr>
-            <tr className="bg-[#26262d33] font-bold text-sm ">
-              <td className="p-3 ">E2kMUXp1ggbDqJtuJ7pssmQ3…</td>
-              <td className="text-center">2 minutes ago</td>
-              <td className="text-center">3FNZvUQQ6VGc33bt…</td>
-              <td className="text-center"> 3j98nUNpX6kA6jSj…</td>
-              <td className="text-center"> 100 SOLBUCKS</td>
-              <td className="text-center">
-                <button className=" px-2  bg-[#36DDAB] rounded font-bold text-gray-800">
-                  Success
-                </button>
-              </td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>

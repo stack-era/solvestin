@@ -2,12 +2,12 @@ import React from "react";
 import { useRouter } from "next/router";
 import type { NextPage } from "next";
 import Head from "next/head";
-import withAuthentication from "../../hoc/ProtectedRoute";
-import SideNav from "../../modules/SideNav/SideNav";
-import TokensDashboard from "../../modules/Tokens/TokensDashboard";
-import { ShowBucketsContext } from "../../hooks/ShowBucketsContext";
+import withAuthentication from "../../../hoc/ProtectedRoute";
+import SideNav from "../../../modules/SideNav/SideNav";
+import TokensDashboard from "../../../modules/Tokens/TokensDashboard";
+import { ShowBucketsContext } from "../../../hooks/ShowBucketsContext";
 import { useState, useEffect } from "react";
-import { ActiveWindowContext } from "../../hooks/ActiveWindowContext";
+import { ActiveWindowContext } from "../../../hooks/ActiveWindowContext";
 
 const Tokens: NextPage = () => {
   const router = useRouter();

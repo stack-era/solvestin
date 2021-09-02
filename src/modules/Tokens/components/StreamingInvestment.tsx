@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { getStreams } from "../../../helpers/get";
+import { ToastContainer, toast } from "react-toastify";
 
 const StreamingInvestment = () => {
   const router = useRouter();
@@ -20,6 +21,16 @@ const StreamingInvestment = () => {
   // console.log(publicAddress);
 
   const handleStartInvestment = (e: any) => {
+    toast("🦄 Wow so easy!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
     e.preventDefault();
     if (solveToken && intervel && quantity && publicAddress) {
       axios
@@ -85,12 +96,12 @@ const StreamingInvestment = () => {
         >
           1 Month
         </button>
-        <button
+        {/* <button
           className="py-3 w-[74px] bg-gradient-to-b from-[#00A3FF] via-[#5C8FFF] to-[#1F5AF0] rounded font-bold"
           onClick={() => setIntervel("3 Months")}
         >
           3 Months
-        </button>
+        </button> */}
       </div>
       <div className="flex justify-center mt-10">
         <button
@@ -100,6 +111,17 @@ const StreamingInvestment = () => {
           {" "}
           START INVESMENT{" "}
         </button>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
       <h6 className="text-sm __text-cario text-center mt-4">
         Please note you will need to maintain SOL <br /> in your account for

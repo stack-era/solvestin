@@ -27,7 +27,7 @@ import SideNav from "../SideNav/SideNav";
 const Home = () => {
   const { isAuthenticated, setAuthentication } = useAuthContext();
   const router = useRouter();
-
+  const { } = useWallet();
   const endpoint = useMemo(() => clusterApiUrl("devnet"), []);
   const wallets = useMemo(() => [getSolletWallet(), getPhantomWallet()], []);
   const onError = useCallback((error: WalletError) => {

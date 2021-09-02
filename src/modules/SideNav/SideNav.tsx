@@ -64,7 +64,7 @@ const SideNav = () => {
                 : ""
             }`}
             onClick={(e) => {
-              router.push(`/tokens/${1}`);
+              router.push(`/tokens/${1}/${"SOLBUCKS"}`);
               // setActiveWindow("payment");
             }}
           >

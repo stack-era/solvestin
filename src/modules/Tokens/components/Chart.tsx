@@ -3,77 +3,87 @@ import { Line } from "react-chartjs-2";
 import Image from "next/image";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
 import { useActiveWindowContext } from "../../../hooks/ActiveWindowContext";
-import { getOneSolvestTokens } from "../../../helpers/get";
+import {
+  getOneSolvestTokens,
+  getSolvestChartTokensData,
+} from "../../../helpers/get";
 import { useRouter } from "next/router";
-
-const Chartdata = {
-  labels: [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [40, 40, 30, 10, 10, 10, 10, 48, 40, 30, 20, 20],
-      fill: false,
-      backgroundColor: "#524EEE",
-      borderColor: "#534eeeb0",
-    },
-  ],
-};
-
-const options = {
-  scales: {
-    x: {
-      grid: {
-        display: false,
-        color: "#52525265",
-      },
-      ticks: {
-        color: "#ffffff",
-      },
-    },
-    y: {
-      grid: {
-        display: true,
-        color: "#52525230",
-      },
-      min: 5,
-      max: 50,
-      ticks: {
-        // forces step size to be 50 units
-        stepSize: 10,
-        color: "#999999",
-      },
-    },
-  },
-
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-};
 
 const Chart = () => {
   const router = useRouter();
-  const { token } = router.query;
-
+  const { token, symbol } = router.query;
 
   const { isLoading, error, data, isFetching } = getOneSolvestTokens(
     parseInt(token as string)
   );
-  // console.log(data);
+
+  const {
+    isLoading: isChartLoading,
+    error: chartError,
+    data: chartData,
+    isFetching: isChartFetching,
+  } = getSolvestChartTokensData(symbol as string);
+  // console.log(chartData);
+
+  let price;
+  let time;
+
+  if (!isChartLoading && chartData) {
+    price = chartData.map((value: any) => value.price);
+    time = chartData.map((value: any) => {
+      const newd = new Date(value.time);
+      return value.time;
+    });
+  }
+
+  // const newd = new Date("2021-09-02T07:00:00");
+  // console.log(time);
+
+  const Chartdata = {
+    labels: time,
+    datasets: [
+      {
+        label: "# of Votes",
+        data: price,
+        fill: false,
+        backgroundColor: "#524EEE",
+        borderColor: "#534eeeb0",
+      },
+    ],
+  };
+
+  const options = {
+    scales: {
+      x: {
+        grid: {
+          display: false,
+          color: "#52525265",
+        },
+        ticks: {
+          color: "#ffffff",
+        },
+      },
+      y: {
+        grid: {
+          display: true,
+          color: "#52525230",
+        },
+        min: 2,
+        max: 50,
+        ticks: {
+          // forces step size to be 50 units
+          stepSize: 1,
+          color: "#999999",
+        },
+      },
+    },
+
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
 
   return (
     <div className="   ml-6 mt-4 p-5   rounded-2xl ">

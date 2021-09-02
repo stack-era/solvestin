@@ -101,9 +101,47 @@ export function getTokenTransactions() {
 export function getUsersHistoricalPortfolio() {
   //   const publicKey = useReadLocalStorage("publicKey");
   //   console.log("publicKey", publicKey);
+  // Remove "" from localstorage string
   return useQuery("historyPortfolio", async () => {
     const { data } = await axios.get(
       "http://194.163.160.51:7000/api/user_historical_portfolio?publicKey=Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"
+    );
+    return data;
+  });
+}
+
+/// 10 /api/get_user_solvest_transactions?
+export function getUsersSolvestTransactions() {
+  //   const publicKey = useReadLocalStorage("publicKey");
+  //   console.log("publicKey", publicKey);
+  // Remove "" from localstorage string
+  return useQuery("getSolvestTransactions", async () => {
+    const { data } = await axios.get(
+      "http://194.163.160.51:7000/api/get_user_solvest_transactions?publicKey=Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"
+    );
+    return data;
+  });
+}
+
+
+/// 12 /api/get_index_tokens
+export function getIndexTokens() {
+  return useQuery("IndexTokens", async () => {
+    const { data } = await axios.get(
+      "http://194.163.160.51:7000/api/get_index_tokens"
+    );
+    return Object.entries(data).map(([key, value]: any) => ({
+      ...value,
+      symbol: key,
+    }));
+  });
+}
+
+/// 14 /solvest_tokens_chart_data
+export function getSolvestChartTokensData(symbol: string) {
+  return useQuery("solvest_chart_tokens", async () => {
+    const { data } = await axios.get(
+      `http://194.163.160.51:7000/api/solvest_tokens_chart_data?symbol=${symbol}`
     );
     return data;
   });

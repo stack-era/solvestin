@@ -22,6 +22,21 @@ const Holdings: React.FC<HoldingsProps> = () => {
 
   const { isLoading, error, data, isFetching } = getHoldings();
   const nf = new Intl.NumberFormat();
+  // console.log(data);
+  let USDT;
+  if (!isLoading && data) {
+    USDT = data.data.filter((value: any) => value.tokenSymbol === "USDT");
+  }
+  // console.log(USDT);
+
+  const displayKey = (key: string) => {
+    return key.length > 20
+      ? `${key.substring(0, 7)}.....${key.substring(
+          key.length - 7,
+          key.length
+        )}`
+      : key;
+  };
 
   return (
     <>
@@ -44,26 +59,20 @@ const Holdings: React.FC<HoldingsProps> = () => {
           />
         </div>
         <div className="__text-cario font-bold">
-          <p>6wxt1F........AFfx</p>
+          <p>{displayKey(localStorage.getItem("publicKey") as string)}</p>
           <p className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold ">
-            $2,258.56
+            ${!isLoading && data && USDT[0] && USDT[0].tokenAmountUI}
           </p>
         </div>
         <div className="">
-          <Image
-            src={DownArrow}
-            alt="Dashboard Icon"
-            width={12}
-            height={12}
-            className=""
-          />
+          <Image src={DownArrow} alt="Dashboard Icon" width={12} height={12} />
         </div>
       </div>
       <div className="bg-[#1f1f22] h-screen   ml-11 rounded-tl-3xl">
         <div className="__text-cario flex items-center gap-5 p-6">
           <h2 className="font-bold text-xl">Your Holdings</h2>
           <h5 className="text-center w-8 h-5 text-sm font-bold rounded-2xl bg-[#51B56D]">
-            {data?.length}
+            {!isLoading && data && data.data?.length}
           </h5>
         </div>
         <div className="__hide-scrollbar overflow-y-scroll h-[50%]">

@@ -5,13 +5,19 @@ import RightArrow from "../../../assets/icons/Right-arrow-icon.svg";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
 import RedArrow from "../../../assets/icons/Red-Arrow-icon.svg";
 import { useActiveWindowContext } from "../../../hooks/ActiveWindowContext";
-import { getSolvestTokens } from "../../../helpers/get";
+import { getIndexTokens, getSolvestTokens } from "../../../helpers/get";
 
 const Buckets = () => {
   const router = useRouter();
   const { activeWindow, setActiveWindow } = useActiveWindowContext();
   const { isLoading, error, data, isFetching } = getSolvestTokens();
-
+  const {
+    isLoading: isIndexTokensLoading,
+    error: IndexTokensError,
+    data: IndexTokens,
+    isFetching: isIndexTokensFetching,
+  } = getIndexTokens();
+  // console.log(data)
   return (
     <div className="__text-cario ml-6 mt-12">
       <>
@@ -37,7 +43,11 @@ const Buckets = () => {
                   key={index}
                   className=" w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3 cursor-pointer"
                   onClick={() =>
-                    router.push(`/tokens/${!isLoading && token ? token.id : 1}`)
+                    router.push(
+                      `/tokens/${!isLoading && token ? token.id : 1}/${
+                        !isLoading && token ? token.symbol : "SOLBUCKS"
+                      }`
+                    )
                   }
                 >
                   <div className="flex items-center justify-between">
@@ -158,7 +168,43 @@ const Buckets = () => {
         </div>
         <div className="">
           <div className="flex flex-nowrap mt-5 gap-5 ">
-            <div className=" w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3">
+            {!isIndexTokensLoading &&
+              IndexTokens &&
+              IndexTokens.map((token: any, index: any) => (
+                <div
+                  key={index}
+                  className=" w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3 cursor-pointer"
+                >
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-bold text-lg">
+                      {token.name} ({token.symbol})
+                    </h3>
+                    <div className="  ">
+                      <Image
+                        src={RightArrow}
+                        alt="Dashboard Icon"
+                        width={18}
+                        height={18}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex items-baseline gap-2 my-3 ">
+                    <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
+                      ${token.price.toFixed(2)}
+                    </h2>
+                    <Image
+                      src={GreenIcon}
+                      alt="Dashboard Icon"
+                      width={12}
+                      height={10}
+                    />
+                    <h5 className="text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A]">
+                      + 6.7%
+                    </h5>
+                  </div>
+                </div>
+              ))}
+            {/* <div className=" w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3">
               <div className="flex items-center justify-between">
                 <h3 className="font-bold text-lg">Wrapped ETH</h3>
                 <div className="  ">
@@ -238,7 +284,7 @@ const Buckets = () => {
                   + 6.7%
                 </h5>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </>

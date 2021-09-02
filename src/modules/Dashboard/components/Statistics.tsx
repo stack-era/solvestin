@@ -14,7 +14,8 @@ const Statistics = () => {
   let addTotalChanges;
   let weeklyChange;
 
-  if (!isLoading && !error) {
+
+  if (!isLoading && !error && data) {
     const totalPrices = data.data.map(
       (token: any) => token.priceUsdt * token.tokenAmountUI
     );
@@ -24,12 +25,15 @@ const Statistics = () => {
     });
     // console.log(sumOfPrices.toFixed(2));
     const totalChanges = data.data.map((token: any) => token.todayChange);
-    addTotalChanges = totalChanges.reduce(function (
-      accumulator: any,
-      current: any
-    ) {
-      return accumulator + current;
-    });
+    // console.log(totalChanges)
+    if (totalChanges) {
+      addTotalChanges = totalChanges.reduce(function (
+        accumulator: any,
+        current: any
+      ) {
+        return accumulator + current;
+      });
+    }
     // console.log(addTotalChanges * (sumOfPrices / 100));
     last24hrs = addTotalChanges * (sumOfPrices / 100);
     weeklyChange = data.weekly[0].weekChange * (sumOfPrices / 100);
@@ -94,7 +98,7 @@ const Statistics = () => {
                 {!isLoading &&
                   data.weekly[0].weekChange &&
                   weeklyChange &&
-                  weeklyChange.toFixed(4)}
+                  weeklyChange.toFixed(2)}
               </h2>
               <Image
                 src={GreenIcon}
