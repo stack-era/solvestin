@@ -9,7 +9,7 @@ import {
   TransactionInstruction
 } from '@solana/web3.js'
 import { getErrorForTransaction } from './utils/getErrorForTransaction'
-import soproxABI from 'soprox-abi'
+// import soproxABI from 'soprox-abi'
 
 type Schema = { key: string; type: string }[]
 
