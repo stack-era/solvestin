@@ -1,6 +1,6 @@
 import { BaseSignerWalletAdapter } from '@solana/wallet-adapter-base'
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom'
-import { useConnection } from 'context/Connection'
+import { useConnection } from './Connection'
 import React, {
   createContext,
   FC,
@@ -9,7 +9,7 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import { lamportsToSol } from 'solana/utils/lamportsToSol'
+import { lamportsToSol } from '../solana/utils/lamportsToSol'
 
 type WalletContextType = {
   walletPK?: string

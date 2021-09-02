@@ -1,7 +1,7 @@
 import { PublicKey } from '@solana/web3.js'
-import appConfig from 'config.json'
-import { useConnection } from 'context/Connection'
-import { useWallet } from 'context/Wallet'
+import appConfig from '../config.json'
+import { useConnection } from './Connection'
+import { useWallet } from './Wallet'
 import {
   createContext,
   FC,
@@ -10,8 +10,8 @@ import {
   useEffect,
   useState,
 } from 'react'
-import { INTERVAL, Invest } from 'solana/invest'
-import { solToLamports } from 'solana/utils/solToLamports'
+import { INTERVAL, Invest } from '../solana/invest'
+import { solToLamports } from '../solana/utils/solToLamports'
 
 const APP_PROGRAM_KEY = new PublicKey(appConfig.programId)
 

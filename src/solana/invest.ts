@@ -5,8 +5,8 @@ import {
   PublicKey,
   TransactionInstruction,
 } from '@solana/web3.js'
-import appConfig from 'config.json'
-import { BaseModal } from 'solana/base'
+import appConfig from '../config.json'
+import { BaseModal } from './base'
 
 const APP_PROGRAM_KEY = new PublicKey(appConfig.programId)
 

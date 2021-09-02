@@ -26,6 +26,7 @@
     "react-toastify": "^8.0.2",
     "sass": "^1.38.0",
     "sharp": "^0.29.0",
+    "soprox-abi": "^0.0.14",
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
