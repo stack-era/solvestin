@@ -2,8 +2,6 @@ import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import SideNav from "../modules/SideNav/SideNav";
-import withAuthentication from "../hoc/ProtectedRoute";
-import Dashboard from "../modules/Dashboard/Dashboard";
 import { ShowBucketsContext } from "../hooks/ShowBucketsContext";
 import { useState } from "react";
 import { ActiveWindowContext } from "../hooks/ActiveWindowContext";

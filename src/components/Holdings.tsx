@@ -13,6 +13,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { getHoldings } from "../helpers/get";
+import useReadLocalStorage from "../hooks/useReadLocalStorage";
 
 interface HoldingsProps {}
 
@@ -21,6 +22,7 @@ const Holdings: React.FC<HoldingsProps> = () => {
   const { showBuckets, setShowBuckets } = useShowBucketsContext();
 
   const { isLoading, error, data, isFetching } = getHoldings();
+  const publicKey = useReadLocalStorage("publicKey");
   const nf = new Intl.NumberFormat();
   // console.log(data);
   let USDT;
@@ -59,7 +61,7 @@ const Holdings: React.FC<HoldingsProps> = () => {
           />
         </div>
         <div className="__text-cario font-bold">
-          <p>{displayKey(localStorage.getItem("publicKey") as string)}</p>
+          <p>{displayKey(String(publicKey))}</p>
           <p className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold ">
             ${!isLoading && data && USDT[0] && USDT[0].tokenAmountUI}
           </p>

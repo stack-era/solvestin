@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { getStreams } from "../../../helpers/get";
 import { ToastContainer, toast } from "react-toastify";
+import useReadLocalStorage from "../../../hooks/useReadLocalStorage";
 
 const StreamingInvestment = () => {
   const router = useRouter();
@@ -14,9 +15,11 @@ const StreamingInvestment = () => {
   );
   const [intervel, setIntervel] = useState<string | undefined>("");
   const [quantity, setQuantity] = useState<number | undefined>(0);
-  const [publicAddress, setPublicAddress] = useState(
-    String(localStorage.getItem("publicKey")?.replaceAll('"', ""))
-  );
+  // const [publicAddress, setPublicAddress] = useState(
+  //   String(localStorage.getItem("publicKey")?.replaceAll('"', ""))
+  // );
+  const publicKey = useReadLocalStorage("publicKey");
+  const [publicAddress, setPublicAddress] = useState(publicKey);
 
   // console.log(publicAddress);
 
