@@ -1,14 +1,16 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 import useReadLocalStorage from "../hooks/useReadLocalStorage";
+import { useCustomWallet } from "../context/Wallet";
 
 /// 01 api/get_key_balances
 export function getHoldings() {
   //   const publicKey = useReadLocalStorage("publicKey");
   //   console.log("publicKey", publicKey);
+  const { walletPK } = useCustomWallet();
   return useQuery("holdings", async () => {
     const { data } = await axios.get(
-      "http://194.163.160.51:7000/api/get_key_balances?key=Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"
+      `http://194.163.160.51:7000/api/get_key_balances?key=${walletPK}`
     );
     return data;
   });

@@ -1,15 +1,10 @@
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useAuthContext } from "../auth/authContext";
 
 const Login = dynamic(() => import("../modules/Login"), { ssr: false });
 
 const Home: NextPage = () => {
-  const { isAuthenticated, setAuthentication } = useAuthContext();
-  const router = useRouter();
-
   return (
     <div className="w-screen h-screen overflow-hidden bg-[#141417] text-white antialiased">
       <Head>
