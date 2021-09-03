@@ -16,14 +16,11 @@ payer_priv_key = [6, 208, 225, 71, 116, 134, 41, 154, 131, 204, 187, 35, 134, 16
 withdraw_payer = Account(payer_priv_key[:32])
 programId = "KDr4UTEmxbX6AZexzo652VikoBoJRNGn8QafHWmyw48"
 
-dev_4_priv = [154, 62, 175, 106, 31, 23, 233, 129, 64, 128, 83, 128, 130, 20, 41, 120, 239, 121, 227, 40, 23, 234, 77, 47, 181, 134, 89, 145, 148, 30, 166,
-              194, 194, 180, 17, 248, 112, 70, 90, 93, 213, 188, 162, 44, 68, 76, 205, 121, 191, 227, 225, 177, 197, 36, 167, 249, 176, 0, 152, 10, 122, 231, 41, 53]
-
+dev_4_priv = payer_priv_key
 transfer_payer = Account(dev_4_priv[:32])
 
-token_pub_key = PublicKey("Gmct6qXq8HvjNBJSc9QrySKZknbTqxz7QA9EXFjEn17e")
-token_address_key = PublicKey("9w5RaxyUDz6f83aTtyuf4sWXkgNUd6k1sfqqKbJaEgA1")
-
+token_pub_key = PublicKey("FsrinjAhYaBKQieHhaJNGnepMS3RFHZJVjb1i26JhMdp")
+token_address_key = PublicKey("8dw168zmk3N9oDoMmVNw9Br1mNm26mLhRE1BEYUtZynq")
 solana_client = Client("https://api.devnet.solana.com")
 
 # {"DB CODE for interval": "interval in days"}
