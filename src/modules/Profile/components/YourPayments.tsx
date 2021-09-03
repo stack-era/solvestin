@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { getStreams, getTokenTransactions } from "../../../helpers/get";
 
@@ -9,6 +10,12 @@ const YourPayments = () => {
     data: currentStreams,
     isFetching: isStremFeatching,
   } = getStreams();
+
+  const cancleStream = (id: any) => {
+    axios
+      .get(`http://194.163.160.51:7000/api/stop_stream?streamId=${id}`)
+      .then((response) => console.log(response.data.message));
+  };
   return (
     <div>
       <h2 className="__text-cario font-bold text-2xl mt-14 text-center bg-clip-text text-transparent bg-gradient-to-b from-[#EE4EE8] to-[#FAA08A]">
@@ -45,7 +52,10 @@ const YourPayments = () => {
                   <td className="text-center"> ${stream.price.toFixed(4)}</td>
                   <td className="text-center">
                     {stream.active ? (
-                      <button className="py-1 px-4  bg-gradient-to-b from-[#FF374E]  to-[#DA8D96] rounded font-bold text-gray-800">
+                      <button
+                        className="py-1 px-4  bg-gradient-to-b from-[#FF374E]  to-[#DA8D96] rounded font-bold text-gray-800"
+                        onClick={() => cancleStream(stream.id)}
+                      >
                         Cancel Stream
                       </button>
                     ) : (

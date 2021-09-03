@@ -8,6 +8,7 @@ import {
   getOneSolvestTokens,
   getSolvestChartTokensData,
 } from "../../../helpers/get";
+import moment from "moment";
 
 const Chart = () => {
   const router = useRouter();
@@ -34,12 +35,9 @@ const Chart = () => {
     price = chartData.map((value: any) => value.price);
     time = chartData.map((value: any) => {
       const newd = new Date(value.time);
-      return value.time;
+      return moment(newd).format("dd-mm hh:mm");
     });
   }
-
-  // const newd = new Date("2021-09-02T07:00:00");
-  // console.log(time);
 
   const Chartdata = {
     labels: time,
