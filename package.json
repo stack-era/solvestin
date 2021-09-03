@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 3001",
-    "lint": "next lint"
+    "lint": "next lint",
+    "program:build": "cargo build-bpf --manifest-path=./program/Cargo.toml --bpf-out-dir=./program/dist",
+    "program:deploy": "solana program deploy ./program/dist/main.so"
   },
   "dependencies": {
     "@project-serum/associated-token": "^0.1.1",
