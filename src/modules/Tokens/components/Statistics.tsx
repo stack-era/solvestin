@@ -12,7 +12,7 @@ const Statistics = () => {
   let addTotalChanges;
   let weeklyChange;
 
-  if (!isLoading && !error) {
+  if (!isLoading && !error && data && data.data && data.data.length > 0) {
     const totalPrices = data.data.map(
       (token: any) => token.priceUsdt * token.tokenAmountUI
     );
@@ -76,13 +76,22 @@ const Statistics = () => {
           <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
             ${" "}
             {!isLoading &&
+              data &&
+              data.data &&
+              data.data.length > 0 &&
               data.weekly[0].weekChange &&
               weeklyChange &&
               weeklyChange.toFixed(2)}
           </h2>
           <Image src={GreenIcon} alt="Dashboard Icon" width={22} height={20} />
           <h5 className="text-xl font-semibold">
-            + {!isLoading && data.weekly[0].weekChange.toFixed(2)}%
+            +{" "}
+            {!isLoading &&
+              data &&
+              data.data &&
+              data.data.length > 0 &&
+              data.weekly[0].weekChange.toFixed(2)}
+            %
           </h5>
         </div>
 

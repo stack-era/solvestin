@@ -43,5 +43,5 @@ const dashboard: NextPage = () => {
   );
 };
 
-export default dashboard;
-// export default withAuthentication(dashboard);
+// export default dashboard;
+export default withAuthentication(dashboard);
