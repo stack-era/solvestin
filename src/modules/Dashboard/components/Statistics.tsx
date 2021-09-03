@@ -13,7 +13,10 @@ const Statistics = () => {
   let last24hrs;
   let addTotalChanges;
   let weeklyChange;
+  const givenNumber = 123423134231233423;
 
+  let NumberFormat = new Intl.NumberFormat("en-US");
+  // console.log(NumberFormat.format(givenNumber));
   if (!isLoading && !error && data && data.data) {
     const totalPrices = data.data.map(
       (token: any) => token.priceUsdt * token.tokenAmountUI
@@ -50,7 +53,10 @@ const Statistics = () => {
           </div>
           <div className="__text-cario py-7">
             <h3 className="text-3xl font-bold ">
-              ${!isLoading && sumOfPrices && sumOfPrices.toFixed(2)}
+              $
+              {!isLoading &&
+                sumOfPrices &&
+                NumberFormat.format(sumOfPrices.toFixed(2))}
             </h3>
             <h6 className="text-sm font-thin">Portfolio Total</h6>
           </div>
@@ -66,7 +72,10 @@ const Statistics = () => {
             <h5 className="text-lg font-bold">Last 24 hours</h5>
             <div className="flex items-baseline gap-2">
               <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
-                ${!isLoading && last24hrs && last24hrs.toFixed(2)}
+                $
+                {!isLoading &&
+                  last24hrs &&
+                  NumberFormat.format(last24hrs.toFixed(2) as any)}
               </h2>
               <Image
                 src={GreenIcon}
@@ -103,7 +112,7 @@ const Statistics = () => {
                   data.data.length > 0 &&
                   data.weekly[0].weekChange &&
                   weeklyChange &&
-                  weeklyChange.toFixed(2)}
+                  NumberFormat.format(weeklyChange.toFixed(2) as any)}
               </h2>
               <Image
                 src={GreenIcon}

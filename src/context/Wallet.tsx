@@ -56,14 +56,14 @@ export const useCustomWallet = (): WalletContextType => {
 };
 
 // PROD
-// const SOL_BOCKS_PUB = new PublicKey(
-//   'FsrinjAhYaBKQieHhaJNGnepMS3RFHZJVjb1i26JhMdp'
-// )
+const SOL_BOCKS_PUB = new PublicKey(
+  "FsrinjAhYaBKQieHhaJNGnepMS3RFHZJVjb1i26JhMdp"
+);
 
 // TEST
-const SOL_BOCKS_PUB = new PublicKey(
-  "Gmct6qXq8HvjNBJSc9QrySKZknbTqxz7QA9EXFjEn17e"
-);
+// const SOL_BOCKS_PUB = new PublicKey(
+//   "Gmct6qXq8HvjNBJSc9QrySKZknbTqxz7QA9EXFjEn17e"
+// );
 
 export const CustomWalletProvider: FC = ({ children }) => {
   const [connected, setConnected] = useState(false);
