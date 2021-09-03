@@ -1,24 +1,19 @@
-import React, {
-  MouseEventHandler,
-  useCallback,
-  useEffect,
-  useMemo,
-} from "react";
-import Image from "next/image";
-import SolletIcon from "../../assets/icons/Sollet-icon.svg";
-import PhantomIcon from "../../assets/icons/Phantom-icon.svg";
-import SolflareIcon from "../../assets/icons/Solflare-icon.svg";
-import SolanaVectorIcon from "../../assets/icons/Solana-vector-icon.svg";
-import { useAuthContext } from "../../auth/authContext";
-
+import {
+  BaseSignerWalletAdapter,
+  SignerWalletAdapter,
+  WalletAdapter,
+} from "@solana/wallet-adapter-base";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletName } from "@solana/wallet-adapter-wallets";
+import Image from "next/image";
+import React from "react";
+import { toast } from "react-toastify";
+import SolanaVectorIcon from "../../assets/icons/Solana-vector-icon.svg";
+import { useAuthContext } from "../../auth/authContext";
+import { useCustomWallet } from "../../context/Wallet";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import axios from "axios";
 
 const Login = () => {
-  const { setAuthentication } = useAuthContext();
-
   return (
     <div className="relative flex flex-col justify-center items-center  mt-10 ">
       <div className="flex flex-col items-center">
@@ -32,18 +27,6 @@ const Login = () => {
         <h3 className="font-bold text-lg __login-caption">
           Login to start investing with Solana{" "}
         </h3>
-        {/* <button className="flex items-center justify-center pr-6 w-[404px] h-[61px] bg-gradient-to-b from-[#AB78FF] to-[#4F4AFF] rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer active:opacity-70">
-          <div className="flex place-content-center h-12 w-12  ">
-            <Image
-              src={SolflareIcon}
-              alt="Sollet Icon"
-              width={23}
-              height={23}
-              layout="intrinsic"
-            />
-          </div>
-          LOGIN WITH SOLFLARE
-        </button> */}
         <WalletButtons />
       </div>
       <div className="absolute bottom-[-26rem] right-24 z-0">
@@ -62,10 +45,13 @@ export default Login;
 
 const WalletButtons = () => {
   const { wallets } = useWallet();
+
   return (
     <>
       {wallets.map((wal, index) => {
-        return <SingleWalletButton key={index} wallet={wal} />;
+        return (
+          <SingleWalletButton key={index} wallet={wal} adapter={wal.adapter} />
+        );
       })}
     </>
   );
@@ -76,75 +62,46 @@ interface ISingleWalletButton {
     name: WalletName;
     icon: string;
   };
-  // onClick: (e: MouseEventHandler<HTMLDivElement>) => void;
+  adapter: () => WalletAdapter | SignerWalletAdapter;
 }
+
 const SingleWalletButton = (props: ISingleWalletButton) => {
-  const { wallet } = props;
-  const { adapter } = useWallet();
+  const { wallet, adapter } = props;
   const { setAuthentication } = useAuthContext();
+  const { setActiveWallet } = useCustomWallet();
 
-  const [publicKey, setPublikKey] = useLocalStorage("publicKey", "null");
+  const [_, setPublikKey] = useLocalStorage("publicKey", "null");
 
-  // const history = useHistory();
-  const { select } = useWallet();
+  const onClick = async () => {
+    const _adapter = adapter() as BaseSignerWalletAdapter;
+    await _adapter.connect();
 
-  const content = useMemo(() => {
-    if (adapter?.connecting) return "Connecting ...";
-    if (adapter?.connected) return "Connected";
-    if (wallet) return `login with ${wallet.name}`;
-    return "Connect Wallet";
-  }, [adapter, wallet]);
+    if (_adapter.connected) {
+      console.log("===== connected", _adapter.publicKey);
+      toast("👍 Connected, Ready to Invest!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
 
-  const handleClick: MouseEventHandler<HTMLDivElement> = useCallback(
-    (event) => {
-      select(wallet.name);
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      if (!event.defaultPrevented)
-        adapter
-          ?.connect()
-          .then(() => {
-            console.log("in then");
-            setAuthentication(true);
-            // history.push("/dashboard");
-            // console.log("key login", adapter.publicKey?.toBase58());
+      setActiveWallet(_adapter);
+      setAuthentication(true);
+      if (_adapter.publicKey) setPublikKey(_adapter.publicKey.toBase58());
+    }
+  };
 
-            if (adapter.publicKey) {
-              setPublikKey(adapter.publicKey?.toBase58());
-              axios
-                .post(
-                  `http://194.163.160.51:7000/api/save_userKey?key=${adapter.publicKey?.toBase58()}`
-                )
-                .then((response) =>
-                  console.log("save user publickey", response.data.message)
-                )
-                .catch((err) => console.log("save user publickey Error", err));
-            }
-          })
-          .catch((error) => {
-            console.log("error here", error);
-          });
-    },
-    []
-  );
-
-  // useEffect(() => {
-  //   const fetchAndSetPbAddress = async () => {
-  //     // console.log("pb", publicKey?.toString());
-  //     // const pbKey: string = await publicKey?.toString();
-  //     // setLocalStorage(pbKey);
-  //     // setPublicAddress(publicKey?.toString());
-  //     // history.push("/dashboard");
-  //   };
-  //   if (adapter?.connected) {
-  //     fetchAndSetPbAddress();
-  //   }
-  // }, [adapter?.connected]);
   return (
-    <div onClick={handleClick} className="my-4">
+    <div className="my-4">
       <button
         className={`flex items-center justify-center  pr-6 w-[404px] h-[61px]  rounded-lg __login-button-title font-bold text-lg tracking-wide cursor-pointer active:opacity-70 bg-gradient-to-b 
         ${wallet.name === "Sollet" && " from-[#FFB84F] to-[#FF374E]"} 
          ${wallet.name === "Phantom" && " from-[#C9FF56] to-[#0CE255]"} `}
+        onClick={onClick}
       >
         <div className="flex place-content-center h-7 w-12  ">
           <Image

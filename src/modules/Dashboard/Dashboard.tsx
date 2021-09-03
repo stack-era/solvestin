@@ -1,22 +1,15 @@
 import React from "react";
-
-import Statistics from "./components/Statistics";
 import Holdings from "../../components/Holdings";
-import Chart from "./components/Chart";
-import Allinvestments from "./components/Allinvestments";
-import InvestmentBuckets from "./components/InvestmentBuckets";
-import { useShowBucketsContext } from "../../hooks/ShowBucketsContext";
-
 import SearchBar from "../../components/SearchBar";
-import { useEffect } from "react";
 import { useActiveWindowContext } from "../../hooks/ActiveWindowContext";
-
+import { useShowBucketsContext } from "../../hooks/ShowBucketsContext";
+import Allinvestments from "./components/Allinvestments";
+import Chart from "./components/Chart";
+import Statistics from "./components/Statistics";
 
 const Dashboard: React.FC = () => {
   const { showBuckets, setShowBuckets } = useShowBucketsContext();
   const { activeWindow, setActiveWindow } = useActiveWindowContext();
-
-
 
   return (
     <div>

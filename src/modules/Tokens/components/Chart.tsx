@@ -1,17 +1,19 @@
+import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 import { Line } from "react-chartjs-2";
-import Image from "next/image";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
-import { useActiveWindowContext } from "../../../hooks/ActiveWindowContext";
+import { useCustomWallet } from "../../../context/Wallet";
 import {
   getOneSolvestTokens,
   getSolvestChartTokensData,
 } from "../../../helpers/get";
-import { useRouter } from "next/router";
 
 const Chart = () => {
   const router = useRouter();
   const { token, symbol } = router.query;
+
+  const { isSolBuckAdded, addSolBucksToAccount } = useCustomWallet();
 
   const { isLoading, error, data, isFetching } = getOneSolvestTokens(
     parseInt(token as string)
@@ -107,9 +109,14 @@ const Chart = () => {
             </h5>
           </div>
         </div>
-        <button className="w-[103px] h-[62px] bg-gradient-to-b from-[#5C8FFF] to-[#7B78FF] rounded-md ml-[20%]  font-bold text-gray-800 __text-cario">
-          ADD TO WALLET
-        </button>
+        {!isSolBuckAdded && (
+          <button
+            onClick={addSolBucksToAccount}
+            className="w-[103px] h-[62px] bg-gradient-to-b from-[#5C8FFF] to-[#7B78FF] rounded-md ml-[20%]  font-bold text-gray-800 __text-cario"
+          >
+            ADD TO WALLET
+          </button>
+        )}
       </div>
       <h6 className="text-center text-xs __text-cario mb-3">
         The investment distribution of the token based on percentage{" "}

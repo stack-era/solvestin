@@ -1,12 +1,6 @@
 import React from "react";
-
 import Holdings from "../../components/Holdings";
-
-import { useShowBucketsContext } from "../../hooks/ShowBucketsContext";
-
 import SearchBar from "../../components/SearchBar";
-
-import { useActiveWindowContext } from "../../hooks/ActiveWindowContext";
 import Statistics from "../Dashboard/components/Statistics";
 import InvestmentBuckets from "./components/InvestmentBuckets";
 

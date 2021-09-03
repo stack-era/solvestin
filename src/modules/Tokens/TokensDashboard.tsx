@@ -1,15 +1,11 @@
 import React from "react";
-import SearchBar from "../../components/SearchBar";
-import Image from "next/image";
 import Holdings from "../../components/Holdings";
-
-import { ShowBucketsContext } from "../../hooks/ShowBucketsContext";
-import { useState } from "react";
-import Statistics from "./components/Statistics";
+import SearchBar from "../../components/SearchBar";
 import Chart from "./components/Chart";
-import InvestmentDistribution from "./components/InvestmentDistribution";
-import StreamingInvestment from "./components/StreamingInvestment";
 import HistoryTables from "./components/HistoryTables";
+import InvestmentDistribution from "./components/InvestmentDistribution";
+import Statistics from "./components/Statistics";
+import StreamingInvestment from "./components/StreamingInvestment";
 
 interface TokensDashboardProps {
   token: any | undefined;

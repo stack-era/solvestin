@@ -1,21 +1,22 @@
-import React from "react";
 import Image from "next/image";
-import SolanaIcon from "../assets/icons/Solana-holdings-icon.svg";
-import SerumIcon from "../assets/icons/Serum-holdings-icon.svg";
-import RediyumIcon from "../assets/icons/Rediyum-holdings-icon.svg";
-import SolanaSIcon from "../assets/icons/Sol-S-icon.svg";
-import BellIcon from "../assets/icons/Bell-icon.svg";
-import AvatarIcon from "../assets/icons/Avatar-icon.svg";
-import DownArrow from "../assets/icons/Down-Arrow-icon.svg";
-import { useShowBucketsContext } from "../hooks/ShowBucketsContext";
 import { useRouter } from "next/router";
-import axios from "axios";
-import { useEffect } from "react";
-import { useQuery } from "react-query";
+import React from "react";
+import AvatarIcon from "../assets/icons/Avatar-icon.svg";
+import BellIcon from "../assets/icons/Bell-icon.svg";
+import DownArrow from "../assets/icons/Down-Arrow-icon.svg";
+import SolanaSIcon from "../assets/icons/Sol-S-icon.svg";
+import { useCustomWallet } from "../context/Wallet";
 import { getHoldings } from "../helpers/get";
+import { useShowBucketsContext } from "../hooks/ShowBucketsContext";
 import useReadLocalStorage from "../hooks/useReadLocalStorage";
 
 interface HoldingsProps {}
+
+const displayKey = (key: string) => {
+  return key.length > 20
+    ? `${key.substring(0, 7)}.....${key.substring(key.length - 7, key.length)}`
+    : key;
+};
 
 const Holdings: React.FC<HoldingsProps> = () => {
   const router = useRouter();
@@ -24,21 +25,8 @@ const Holdings: React.FC<HoldingsProps> = () => {
   const { isLoading, error, data, isFetching } = getHoldings();
   const publicKey = useReadLocalStorage("publicKey");
   const nf = new Intl.NumberFormat();
-  // console.log(data);
-  let USDT;
-  if (!isLoading && data) {
-    USDT = data.data.filter((value: any) => value.tokenSymbol === "USDT");
-  }
-  // console.log(USDT);
 
-  const displayKey = (key: string) => {
-    return key.length > 20
-      ? `${key.substring(0, 7)}.....${key.substring(
-          key.length - 7,
-          key.length
-        )}`
-      : key;
-  };
+  const { balance, solBuckBalance, isSolBuckAdded } = useCustomWallet();
 
   return (
     <>
@@ -63,7 +51,8 @@ const Holdings: React.FC<HoldingsProps> = () => {
         <div className="__text-cario font-bold">
           <p>{displayKey(String(publicKey))}</p>
           <p className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold ">
-            ${!isLoading && data && USDT[0] && USDT[0].tokenAmountUI}
+            {balance.toFixed(2)} SOL
+            {isSolBuckAdded && `, ${solBuckBalance.toFixed(2)} sBucks`}
           </p>
         </div>
         <div className="">
