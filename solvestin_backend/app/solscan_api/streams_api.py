@@ -10,17 +10,23 @@ from datetime import date
 from solana.rpc.types import TxOpts
 import time
 
-payer_priv_key = [6, 208, 225, 71, 116, 134, 41, 154, 131, 204, 187, 35, 134, 162, 183, 234, 150, 55, 183, 3, 200, 108, 200, 63, 255, 114, 18, 97, 64, 187,
-                  216, 26, 148, 251, 254, 212, 48, 114, 89, 246, 78, 119, 45, 9, 215, 247, 205, 215, 230, 30, 160, 207, 13, 230, 129, 121, 177, 36, 249, 105, 185, 102, 176, 33]
+import os
+from dotenv import load_dotenv
+
+# ENV Variables
+DOTENV_PATH = os.path.join(os.path.dirname(__file__), '../../.env')
+load_dotenv(DOTENV_PATH)
+
+payer_priv_key = os.environ.get('payer_priv_key')
 
 withdraw_payer = Account(payer_priv_key[:32])
-programId = "KDr4UTEmxbX6AZexzo652VikoBoJRNGn8QafHWmyw48"
+programId = os.environ.get('programId')
 
 dev_4_priv = payer_priv_key
 transfer_payer = Account(dev_4_priv[:32])
 
-token_pub_key = PublicKey("FsrinjAhYaBKQieHhaJNGnepMS3RFHZJVjb1i26JhMdp")
-token_address_key = PublicKey("8dw168zmk3N9oDoMmVNw9Br1mNm26mLhRE1BEYUtZynq")
+token_pub_key = PublicKey(os.environ.get('token_pub_key'))
+token_address_key = os.environ.get('token_address_key')
 solana_client = Client("https://api.devnet.solana.com")
 
 # {"DB CODE for interval": "interval in days"}
