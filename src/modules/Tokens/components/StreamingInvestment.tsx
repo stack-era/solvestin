@@ -104,7 +104,7 @@ const StreamingInvestment = () => {
           })
           .then(async () => {
             // after some time refetch all investments
-            setTimeout(refetchAll, 20000);
+            setTimeout(refetchAll, 30000);
             toast(`Investing ${totalAmount / intervalCount} SOL ....`, {
               position: "bottom-right",
               autoClose: 5000,
@@ -284,8 +284,8 @@ const StreamingInvestment = () => {
           />
         </svg>
         <h6 className="text-sm __text-cario mx-2">
-          Please note you will need to maintain SOL <br /> in your account for
-          streaming payments to work.
+          Please note after successful investment,
+          <br /> it might take 10 to 20 sec to reflect on UI.
         </h6>
       </div>
 
