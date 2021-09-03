@@ -5,8 +5,13 @@
 /.pnp
 .pnp.js
 /test-ledger
+<<<<<<< HEAD
 /program/target
 /program/dis
+=======
+/program/target/**/*
+/program/dist/**/*
+>>>>>>> 35a2f475a02b8c3c450b62ed91d8a0274268a6b0
 
 # testing
 /coverage

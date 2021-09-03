@@ -6,6 +6,7 @@ import { ShowBucketsContext } from "../hooks/ShowBucketsContext";
 import { useState } from "react";
 import { ActiveWindowContext } from "../hooks/ActiveWindowContext";
 import UserProfile from "../modules/Profile/UserProfile";
+import withAuthentication from "../hoc/ProtectedRoute";
 
 const profile: NextPage = () => {
   const [showBuckets, setShowBuckets] = useState<boolean>(true);
@@ -33,4 +34,4 @@ const profile: NextPage = () => {
   );
 };
 
-export default profile;
+export default withAuthentication(profile);

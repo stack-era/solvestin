@@ -1,9 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import HeroSectionIcon from "../../../assets/icons/HeroSection-icon.svg";
 import CheckIcon from "../../../assets/icons/Check-icon.svg";
 
 const HeroSection = () => {
+  const router = useRouter();
   return (
     <div className="h-full bg-gradient-to-b from-[#420741] to-[#49327B] __text-cario z-50 ">
       <div className="__text-cario flex flex-col items-center p-3 opacity-80">
@@ -69,7 +71,10 @@ const HeroSection = () => {
             <h3 className="font-bold text-3xl w-56  opacity-80">
               all at one place with SolVesting
             </h3>
-            <button className="ring-1 ring-[#EE4EE8] ring-opacity-80 rounded-lg p-2 mt-5 font-bold text-xl">
+            <button
+              className="ring-1 ring-[#EE4EE8] ring-opacity-80 rounded-lg p-2 mt-5 font-bold text-xl cursor-pointer"
+              onClick={() => router.push("/login")}
+            >
               Connect Wallet
             </button>
             <h5 className="text-lg font-semibold cursor-pointer">
@@ -82,7 +87,7 @@ const HeroSection = () => {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
             fill="#141417"
-            fill-opacity="1"
+            fillOpacity="1"
             d="M0,224L80,202.7C160,181,320,139,480,154.7C640,171,800,245,960,240C1120,235,1280,149,1360,106.7L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
           ></path>
         </svg>

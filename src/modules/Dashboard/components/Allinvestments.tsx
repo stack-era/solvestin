@@ -48,7 +48,7 @@ const Allinvestments = () => {
             {!isUserTransLoading &&
               UserTrans &&
               UserTrans.map((trans: any, index: any) => (
-                <div className="hover:border border-[#363639] hover:bg-gradient-to-r from-[#41444771] to-[#222222] bg-opacity-5 rounded-lg flex items-center justify-between mt-4 p-3 ">
+                <div key={index} className="hover:border border-[#363639] hover:bg-gradient-to-r from-[#41444771] to-[#222222] bg-opacity-5 rounded-lg flex items-center justify-between mt-4 p-3 ">
                   <div className="flex  gap-3 ">
                     {trans.side === "BUY" ? (
                       <h4 className="w-10 h-10 text-center rounded-full bg-gradient-to-b from-[#36DDAB] to-[#E9FFAA] text-gray-800 text-3xl">
