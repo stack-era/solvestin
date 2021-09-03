@@ -4,6 +4,7 @@ import Image from "next/image";
 import SolidDownArrow from "../../../assets/icons/Solid-Down-Arrow-icon.svg";
 import BitcoinIcon from "../../../assets/icons/Bitcoin-icon.svg";
 import { getUsersHistoricalPortfolio } from "../../../helpers/get";
+import moment from "moment";
 
 const Chart = () => {
   const {
@@ -12,13 +13,19 @@ const Chart = () => {
     data: portfilio,
     isFetching,
   } = getUsersHistoricalPortfolio();
-  // console.log(portfilio);
+  // console.log("portfolio", portfilio);
   let performance;
+  let lables1String;
   let lables1;
   if (!isLoading && portfilio && portfilio.data) {
-    lables1 = Object.keys(portfilio.data);
+    lables1String = Object.keys(portfilio.data);
     performance = Object.values(portfilio.data);
   }
+
+  if (lables1String) {
+    lables1 = lables1String.map((value) => moment(value).format("dd-mm hh:mm"));
+  }
+  // console.log("labels", portfilio.data);
 
   const data = {
     labels: lables1,

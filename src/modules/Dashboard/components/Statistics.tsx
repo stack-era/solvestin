@@ -16,7 +16,7 @@ const Statistics = () => {
   const givenNumber = 123423134231233423;
 
   let NumberFormat = new Intl.NumberFormat("en-US");
-  console.log(NumberFormat.format(givenNumber));
+  // console.log(NumberFormat.format(givenNumber));
   if (!isLoading && !error && data && data.data) {
     const totalPrices = data.data.map(
       (token: any) => token.priceUsdt * token.tokenAmountUI
