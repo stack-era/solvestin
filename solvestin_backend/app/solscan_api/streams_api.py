@@ -18,6 +18,8 @@ DOTENV_PATH = os.path.join(os.path.dirname(__file__), '../../.env')
 load_dotenv(DOTENV_PATH)
 
 payer_priv_key = os.environ.get('payer_priv_key')
+payer_priv_key = [int(item) for item in payer_priv_key.strip('][').split(', ')]
+
 
 withdraw_payer = Account(payer_priv_key[:32])
 programId = os.environ.get('programId')
