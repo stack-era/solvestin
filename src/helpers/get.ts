@@ -1,5 +1,5 @@
-import { useQuery } from "react-query";
 import axios from "axios";
+import { useQuery } from "react-query";
 import { useCustomWallet } from "../context/Wallet";
 
 /// 01 api/get_key_balances
@@ -7,10 +7,10 @@ export function getHoldings() {
   const { walletPK } = useCustomWallet();
   return useQuery("holdings", async () => {
     const { data } = await axios.get(
-      `http://194.163.160.51:7000/api/get_key_balances?key=${walletPK}`
+      `https://solvest.in/api/get_key_balances?key=${walletPK}`
     );
     // const { data } = await axios.get(
-    //   `http://194.163.160.51:7000/api/get_key_balances?key=${"Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"}`
+    //   `https://solvest.in/api/get_key_balances?key=${"Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"}`
     // );
     return data;
   });
@@ -20,7 +20,7 @@ export function getHoldings() {
 export function getOneSolvestTokens(_id: Number) {
   return useQuery("OneSolvestToken", async () => {
     const { data } = await axios.get(
-      "http://194.163.160.51:7000/api/get_solvest_tokens"
+      "https://solvest.in/api/get_solvest_tokens"
     );
     const array = Object.entries(data).map(([key, value]: any) => ({
       ...value,
@@ -37,10 +37,10 @@ export function getSolBalance() {
   const { walletPK } = useCustomWallet();
   return useQuery("solBalance", async () => {
     const { data } = await axios.get(
-      `http://194.163.160.51:7000/api/get_sol_balance?key=${walletPK}`
+      `https://solvest.in/api/get_sol_balance?key=${walletPK}`
     );
     // const { data } = await axios.get(
-    //   `http://194.163.160.51:7000/api/get_sol_balance?key=${"Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"}`
+    //   `https://solvest.in/api/get_sol_balance?key=${"Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"}`
     // );
     return data;
   });
@@ -50,7 +50,7 @@ export function getSolBalance() {
 export function getTokens() {
   return useQuery("tokens", async () => {
     const { data } = await axios.get(
-      "http://194.163.160.51:7000/api/get_tokens?limit=5&offset=0"
+      "https://solvest.in/api/get_tokens?limit=5&offset=0"
     );
     return data;
   });
@@ -59,9 +59,7 @@ export function getTokens() {
 /// 04 /api/save_tokens
 export function saveTokens() {
   return useQuery("tokens", async () => {
-    const { data } = await axios.get(
-      "http://194.163.160.51:7000/api/save_tokens"
-    );
+    const { data } = await axios.get("https://solvest.in/api/save_tokens");
     return data;
   });
 }
@@ -70,7 +68,7 @@ export function saveTokens() {
 export function getSolvestTokens() {
   return useQuery("solvestTokens", async () => {
     const { data } = await axios.get(
-      "http://194.163.160.51:7000/api/get_solvest_tokens"
+      "https://solvest.in/api/get_solvest_tokens"
     );
     return Object.entries(data).map(([key, value]: any) => ({
       ...value,
@@ -84,10 +82,10 @@ export function getStreams() {
   const { walletPK } = useCustomWallet();
   return useQuery("streams", async () => {
     const { data } = await axios.get(
-      `http://194.163.160.51:7000/api/get_streams?publicKey=${walletPK}`
+      `https://solvest.in/api/get_streams?publicKey=${walletPK}`
     );
     // const { data } = await axios.get(
-    //   `http://194.163.160.51:7000/api/get_streams?publicKey=${"Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"}`
+    //   `https://solvest.in/api/get_streams?publicKey=${"Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"}`
     // );
     return data;
   });
@@ -97,7 +95,7 @@ export function getStreams() {
 export function getTokenTransactions() {
   return useQuery("trans", async () => {
     const { data } = await axios.get(
-      "http://194.163.160.51:7000/api/get_token_transactions?address=So11111111111111111111111111111111111111112&limit=20&offset=0"
+      "https://solvest.in/api/get_token_transactions?address=So11111111111111111111111111111111111111112&limit=20&offset=0"
     );
     return data;
   });
@@ -109,10 +107,10 @@ export function getUsersHistoricalPortfolio() {
   const { walletPK } = useCustomWallet();
   return useQuery("historyPortfolio", async () => {
     const { data } = await axios.get(
-      `http://194.163.160.51:7000/api/user_historical_portfolio?publicKey=${walletPK}`
+      `https://solvest.in/api/user_historical_portfolio?publicKey=${walletPK}`
     );
     // const { data } = await axios.get(
-    //   `http://194.163.160.51:7000/api/user_historical_portfolio?publicKey=${"Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"}`
+    //   `https://solvest.in/api/user_historical_portfolio?publicKey=${"Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"}`
     // );
     return data;
   });
@@ -124,10 +122,10 @@ export function getUsersSolvestTransactions() {
   const { walletPK } = useCustomWallet();
   return useQuery("getSolvestTransactions", async () => {
     const { data } = await axios.get(
-      `http://194.163.160.51:7000/api/get_user_solvest_transactions?publicKey=${walletPK}`
+      `https://solvest.in/api/get_user_solvest_transactions?publicKey=${walletPK}`
     );
     // const { data } = await axios.get(
-    //   `http://194.163.160.51:7000/api/get_user_solvest_transactions?publicKey=${"Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"}`
+    //   `https://solvest.in/api/get_user_solvest_transactions?publicKey=${"Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"}`
     // );
     return data;
   });
@@ -136,9 +134,7 @@ export function getUsersSolvestTransactions() {
 /// 12 /api/get_index_tokens
 export function getIndexTokens() {
   return useQuery("IndexTokens", async () => {
-    const { data } = await axios.get(
-      "http://194.163.160.51:7000/api/get_index_tokens"
-    );
+    const { data } = await axios.get("https://solvest.in/api/get_index_tokens");
     return Object.entries(data).map(([key, value]: any) => ({
       ...value,
       symbol: key,
@@ -150,7 +146,7 @@ export function getIndexTokens() {
 export function getSolvestChartTokensData(symbol: string) {
   return useQuery("solvest_chart_tokens", async () => {
     const { data } = await axios.get(
-      `http://194.163.160.51:7000/api/solvest_tokens_chart_data?symbol=${symbol}`
+      `https://solvest.in/api/solvest_tokens_chart_data?symbol=${symbol}`
     );
     return data;
   });

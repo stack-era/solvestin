@@ -80,7 +80,7 @@ const SingleWalletButton = (props: ISingleWalletButton) => {
     if (_adapter.connected && _adapter.publicKey) {
       axios
         .post(
-          `http://194.163.160.51:7000/api/save_userKey?key=${_adapter.publicKey.toString()}`
+          `https://solvest.in/api/save_userKey?key=${_adapter.publicKey.toString()}`
         )
         .then(() => {
           setActiveWallet(_adapter);

@@ -29,12 +29,12 @@ const Statistics = () => {
     const totalChanges = data.data.map((token: any) => token.todayChange);
     // console.log(totalChanges)
     if (totalChanges) {
-      addTotalChanges = totalChanges.reduce(function (
-        accumulator: any,
-        current: any
-      ) {
-        return accumulator + current;
-      });
+      addTotalChanges =
+        totalChanges?.length > 0
+          ? totalChanges.reduce(function (accumulator: any, current: any) {
+              return accumulator + current;
+            })
+          : 0;
     }
     // console.log(addTotalChanges * (sumOfPrices / 100));
     last24hrs = addTotalChanges * (sumOfPrices / 100);

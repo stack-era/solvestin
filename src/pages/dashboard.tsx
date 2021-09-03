@@ -1,13 +1,12 @@
-import React from "react";
+import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
-import SideNav from "../modules/SideNav/SideNav";
+import React, { useEffect, useState } from "react";
 import withAuthentication from "../hoc/ProtectedRoute";
-import Dashboard from "../modules/Dashboard/Dashboard";
-import { ShowBucketsContext } from "../hooks/ShowBucketsContext";
-import { useState, useEffect } from "react";
 import { ActiveWindowContext } from "../hooks/ActiveWindowContext";
-import axios from "axios";
+import { ShowBucketsContext } from "../hooks/ShowBucketsContext";
+import Dashboard from "../modules/Dashboard/Dashboard";
+import SideNav from "../modules/SideNav/SideNav";
 
 const dashboard: NextPage = () => {
   const [showBuckets, setShowBuckets] = useState<boolean>(false);
@@ -15,7 +14,7 @@ const dashboard: NextPage = () => {
   useEffect(() => {
     axios
       .post(
-        "http://194.163.160.51:7000/api/update_balances_in_db?key=Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"
+        "https://solvest.in/api/update_balances_in_db?key=Bxp8yhH9zNwxyE4UqxP7a7hgJ5xTZfxNNft7YJJ2VRjT"
       )
       .then((response) => console.log("DB Updated", response.data.message))
       .catch((err) => console.log("DB Error", err));

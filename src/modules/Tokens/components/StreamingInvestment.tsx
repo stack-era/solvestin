@@ -94,7 +94,7 @@ const StreamingInvestment = () => {
 
         // send this address to api along with startTime, endTime, totalAmount, interval
         axios
-          .post("http://194.163.160.51:7000/api/save_stream", {
+          .post("https://solvest.in/api/save_stream", {
             publicAddress: walletPK,
             investPda,
             startTime,
