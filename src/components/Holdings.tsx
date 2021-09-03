@@ -80,7 +80,7 @@ const Holdings: React.FC<HoldingsProps> = () => {
                 >
                   <div className="flex items-center gap-5">
                     <div className=" bg-black rounded-full flex place-content-center w-14 h-10">
-                      {token.tokenIcon !== "" ? (
+                      {token.tokenIcon ? (
                         <Image
                           src={token.tokenIcon}
                           alt="Dashboard Icon"

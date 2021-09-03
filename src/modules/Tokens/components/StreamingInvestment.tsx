@@ -21,6 +21,7 @@ const StreamingInvestment = () => {
   const { connected, balance, walletPK } = useCustomWallet();
   const { invests, createInvest, refetchAll } = useInvestProgram();
 
+  console.log(invests.map(({ publicKey }) => publicKey.toString()));
   const onSubmit = async (
     totalAmount: number,
     intervalCount: number,
