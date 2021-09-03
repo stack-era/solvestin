@@ -5,6 +5,7 @@ import {
 } from "@solana/wallet-adapter-base";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletName } from "@solana/wallet-adapter-wallets";
+import axios from "axios";
 import Image from "next/image";
 import React from "react";
 import { toast } from "react-toastify";
@@ -76,22 +77,39 @@ const SingleWalletButton = (props: ISingleWalletButton) => {
     const _adapter = adapter() as BaseSignerWalletAdapter;
     await _adapter.connect();
 
-    if (_adapter.connected) {
-      console.log("===== connected", _adapter.publicKey);
-      toast("👍 Connected, Ready to Invest!", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+    if (_adapter.connected && _adapter.publicKey) {
+      axios
+        .post(
+          `http://194.163.160.51:7000/api/save_userKey?key=${_adapter.publicKey.toString()}`
+        )
+        .then(() => {
+          setActiveWallet(_adapter);
+          setAuthentication(true);
+          if (_adapter.publicKey) setPublikKey(_adapter.publicKey.toBase58());
 
-      setActiveWallet(_adapter);
-      setAuthentication(true);
-      if (_adapter.publicKey) setPublikKey(_adapter.publicKey.toBase58());
+          toast("👍 Connected, Ready to Invest!", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        })
+        .catch((e) => {
+          toast.error(e.message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        });
     }
   };
 

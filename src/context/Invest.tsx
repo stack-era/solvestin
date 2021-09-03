@@ -44,7 +44,7 @@ export const useInvestProgram = () => {
 export const InvestProgramProvider: FC = ({ children }) => {
   const [invests, setInvests] = useState<Invest[]>([]);
 
-  const { wallet, fetchSolBalance } = useCustomWallet();
+  const { wallet, fetchSolBalance, fetchSolBucksBalance } = useCustomWallet();
   const { connection } = useConnection();
 
   const fetchAll = useCallback(async () => {
@@ -60,7 +60,7 @@ export const InvestProgramProvider: FC = ({ children }) => {
 
   const refetchAll = useCallback(async () => {
     fetchSolBalance();
-    fetchAll();
+    await fetchAll();
   }, [fetchAll, fetchSolBalance]);
 
   const createInvest = useCallback(

@@ -29,6 +29,7 @@ type WalletContextType = {
   setActiveWallet: (wallet: BaseSignerWalletAdapter | null) => void;
   addSolBucksToAccount: () => Promise<void>;
   fetchSolBalance: () => void;
+  fetchSolBucksBalance: () => Promise<void>;
 };
 
 const WalletContext = createContext<WalletContextType>({
@@ -41,6 +42,7 @@ const WalletContext = createContext<WalletContextType>({
   disconnect: async () => {},
   setActiveWallet: (wallet: BaseSignerWalletAdapter | null) => {},
   fetchSolBalance: () => {},
+  fetchSolBucksBalance: async () => {},
   addSolBucksToAccount: async () => {},
 });
 
@@ -77,25 +79,24 @@ export const CustomWalletProvider: FC = ({ children }) => {
   const connect = useCallback(async () => wallet?.connect(), [wallet]);
   const disconnect = useCallback(async () => wallet?.disconnect(), [wallet]);
 
-  const fetchSolBucksBalance = useCallback(() => {
+  const fetchSolBucksBalance = useCallback(async () => {
     if (wallet?.publicKey) {
-      getAssociatedTokenAddress(
-        wallet.publicKey,
-        new PublicKey(SOL_BOCKS_PUB)
-      ).then((a) => {
-        connection
-          .getTokenAccountBalance(a)
-          .then((res) => {
-            if (res.value.uiAmount) {
-              setSolBuckBalance(res.value.uiAmount);
-            }
+      try {
+        const addr = await getAssociatedTokenAddress(
+          wallet.publicKey,
+          new PublicKey(SOL_BOCKS_PUB)
+        );
 
-            setIsSolBuckAdded(true);
-          })
-          .catch(() => {
-            setIsSolBuckAdded(false);
-          });
-      });
+        const res = await connection.getTokenAccountBalance(addr);
+
+        if (res.value.uiAmount) {
+          setSolBuckBalance(res.value.uiAmount);
+        }
+
+        setIsSolBuckAdded(true);
+      } catch {
+        setIsSolBuckAdded(false);
+      }
     }
   }, [connection, wallet?.publicKey]);
 
@@ -143,6 +144,9 @@ export const CustomWalletProvider: FC = ({ children }) => {
 
   useEffect(() => {
     fetchSolBucksBalance();
+    const inter = setInterval(() => fetchSolBucksBalance(), 5000);
+
+    return () => clearInterval(inter);
   }, [fetchSolBucksBalance]);
 
   useEffect(() => {
@@ -167,6 +171,7 @@ export const CustomWalletProvider: FC = ({ children }) => {
         disconnect,
         balance,
         fetchSolBalance,
+        fetchSolBucksBalance,
         solBuckBalance,
         isSolBuckAdded,
         addSolBucksToAccount,

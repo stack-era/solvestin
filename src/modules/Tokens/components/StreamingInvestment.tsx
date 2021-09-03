@@ -55,6 +55,7 @@ const StreamingInvestment = () => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
+
         progress: undefined,
         theme: "dark",
       });
@@ -78,6 +79,8 @@ const StreamingInvestment = () => {
       );
 
       if (investPda) {
+        // successfully invested totalAmount
+
         toast(`Locked ${totalAmount} at ${displayKey(investPda)}`, {
           position: "bottom-right",
           autoClose: 5000,
@@ -89,9 +92,6 @@ const StreamingInvestment = () => {
           theme: "dark",
         });
 
-        // successfully invested totalAmount
-        await refetchAll();
-
         // send this address to api along with startTime, endTime, totalAmount, interval
         axios
           .post("http://194.163.160.51:7000/api/save_stream", {
@@ -102,7 +102,20 @@ const StreamingInvestment = () => {
             totalAmount,
             interval,
           })
-          .then(() => {})
+          .then(async () => {
+            // after some time refetch all investments
+            setTimeout(refetchAll, 20000);
+            toast(`Investing ${totalAmount / intervalCount} SOL ....`, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+          })
           .catch((e) => {
             toast.error(e.message, {
               position: "bottom-right",
@@ -148,7 +161,7 @@ const StreamingInvestment = () => {
           min="0"
           className="text-sm __text-cario text-center bg-[#141417] w-[30%] outline-none ring-1 ring-gray-100 p-2 rounded-md "
           placeholder="Enter total investment amount in SOL"
-          onChange={(e) => setQuantity(parseInt(e.target.value))}
+          onChange={(e) => setQuantity(Number(e.target.value))}
         />
       </div>
       <h6 className="text-sm __text-cario text-center mt-4">

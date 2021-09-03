@@ -1,12 +1,11 @@
-import React from "react";
 import Image from "next/image";
+import React from "react";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
 import SolanaSmallIcon from "../../../assets/icons/Solana-small-icon.svg";
 import { getHoldings } from "../../../helpers/get";
 
 const Statistics = () => {
   const { isLoading, error, data, isFetching } = getHoldings();
-
 
   let sumOfPrices;
   let last24hrs;
@@ -18,9 +17,12 @@ const Statistics = () => {
       (token: any) => token.priceUsdt * token.tokenAmountUI
     );
     // console.log(totalPrices);
-    sumOfPrices = totalPrices.reduce(function (accumulator: any, current: any) {
-      return accumulator + current;
-    });
+    sumOfPrices =
+      totalPrices?.length > 0
+        ? totalPrices.reduce(function (accumulator: any, current: any) {
+            return accumulator + current;
+          })
+        : 0;
     // console.log(sumOfPrices.toFixed(2));
     const totalChanges = data.data.map((token: any) => token.todayChange);
     addTotalChanges = totalChanges.reduce(function (
@@ -80,7 +82,7 @@ const Statistics = () => {
           </h2>
           <Image src={GreenIcon} alt="Dashboard Icon" width={22} height={20} />
           <h5 className="text-xl font-semibold">
-            + { !isLoading && data.weekly[0].weekChange.toFixed(2)}%
+            + {!isLoading && data.weekly[0].weekChange.toFixed(2)}%
           </h5>
         </div>
 

@@ -1,9 +1,9 @@
-import React from "react";
 import Image from "next/image";
-import SolSicon from "../../../assets/icons/Sol-S-icon.svg";
+import React from "react";
 import GreenIcon from "../../../assets/icons/Green-arrow-icon.svg";
-import { useShowBucketsContext } from "../../../hooks/ShowBucketsContext";
+import SolSicon from "../../../assets/icons/Sol-S-icon.svg";
 import { getHoldings } from "../../../helpers/get";
+import { useShowBucketsContext } from "../../../hooks/ShowBucketsContext";
 
 const Statistics = () => {
   const { showBuckets, setShowBuckets } = useShowBucketsContext();
@@ -19,9 +19,12 @@ const Statistics = () => {
       (token: any) => token.priceUsdt * token.tokenAmountUI
     );
     // console.log(totalPrices);
-    sumOfPrices = totalPrices.reduce(function (accumulator: any, current: any) {
-      return accumulator + current;
-    });
+    sumOfPrices =
+      totalPrices?.length > 0
+        ? totalPrices.reduce(function (accumulator: any, current: any) {
+            return accumulator + current;
+          })
+        : 0;
     // console.log(sumOfPrices.toFixed(2));
     const totalChanges = data.data.map((token: any) => token.todayChange);
     // console.log(totalChanges)
