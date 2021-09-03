@@ -37,6 +37,7 @@ const HistoryTables = () => {
           <tbody>
             {!isUserTransLoading &&
               UserTrans &&
+              UserTrans.length > 0 &&
               UserTrans.map((trans: any, index: any) => (
                 <tr key={index} className="bg-[#232323] font-bold text-sm ">
                   <td className="p-3 max-w-[3rem] truncate">

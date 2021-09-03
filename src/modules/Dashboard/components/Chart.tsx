@@ -12,10 +12,10 @@ const Chart = () => {
     data: portfilio,
     isFetching,
   } = getUsersHistoricalPortfolio();
-
+  // console.log(portfilio);
   let performance;
   let lables1;
-  if (!isLoading && portfilio) {
+  if (!isLoading && portfilio && portfilio.data) {
     lables1 = Object.keys(portfilio.data);
     performance = Object.values(portfilio.data);
   }

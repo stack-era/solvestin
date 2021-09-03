@@ -47,8 +47,12 @@ const Allinvestments = () => {
 
             {!isUserTransLoading &&
               UserTrans &&
+              UserTrans.length > 0 &&
               UserTrans.map((trans: any, index: any) => (
-                <div key={index} className="hover:border border-[#363639] hover:bg-gradient-to-r from-[#41444771] to-[#222222] bg-opacity-5 rounded-lg flex items-center justify-between mt-4 p-3 ">
+                <div
+                  key={index}
+                  className="hover:border border-[#363639] hover:bg-gradient-to-r from-[#41444771] to-[#222222] bg-opacity-5 rounded-lg flex items-center justify-between mt-4 p-3 "
+                >
                   <div className="flex  gap-3 ">
                     {trans.side === "BUY" ? (
                       <h4 className="w-10 h-10 text-center rounded-full bg-gradient-to-b from-[#36DDAB] to-[#E9FFAA] text-gray-800 text-3xl">
@@ -81,18 +85,6 @@ const Allinvestments = () => {
                 </div>
               ))}
 
-            {/* <div className=" flex items-center justify-between mt-2 p-3">
-              <div className="flex  gap-3 ">
-                <h4 className="w-10 h-10 text-center rounded-full bg-gradient-to-b to-[#FC354C] from-[#FF9983]  text-3xl">
-                  -
-                </h4>
-                <div className="flex flex-col">
-                  <h2 className="font-bold text-lg">SOLVEST TOKEN (SOLV)</h2>
-                  <h6 className="opacity-60 text-xs">SELL 1.15 SOLV</h6>
-                </div>
-              </div>
-              <h6 className="text-xl text-[#FF374E] mt-1">- $49.59</h6>
-            </div> */}
             <h3 className="text-sm opacity-50 text-center underline cursor-pointer">
               See all transactions
             </h3>

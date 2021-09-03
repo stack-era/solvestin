@@ -30,6 +30,7 @@ const YourPayments = () => {
           <tbody>
             {!isStreamLoading &&
               currentStreams &&
+              currentStreams.length > 0 &&
               currentStreams.map((stream: any, index: any) => (
                 <tr
                   key={index}
