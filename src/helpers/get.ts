@@ -123,7 +123,6 @@ export function getUsersSolvestTransactions() {
   });
 }
 
-
 /// 12 /api/get_index_tokens
 export function getIndexTokens() {
   return useQuery("IndexTokens", async () => {

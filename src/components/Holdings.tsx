@@ -63,12 +63,16 @@ const Holdings: React.FC<HoldingsProps> = () => {
         <div className="__text-cario flex items-center gap-5 p-6">
           <h2 className="font-bold text-xl">Your Holdings</h2>
           <h5 className="text-center w-8 h-5 text-sm font-bold rounded-2xl bg-[#51B56D]">
-            {!isLoading && data && data.data?.length}
+            {!isLoading && data && data.data && data.data.length > 0
+              ? data.data?.length
+              : " 0"}
           </h5>
         </div>
         <div className="__hide-scrollbar overflow-y-scroll h-[50%]">
           <div className=" grid grid-flow-row gap-8  px-7 ">
             {!isLoading &&
+              data.data &&
+              data.data.length > 0 &&
               data.data.map((token: any, index: any) => (
                 <div
                   className="flex items-center justify-between mx-4 "
