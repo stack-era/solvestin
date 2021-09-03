@@ -11,7 +11,7 @@ const withAuthentication: withAuthenticationFn = (Component) => {
     const router = useRouter();
 
     useEffect(() => {
-      if (!isAuthenticated) router.push("/");
+      if (!isAuthenticated) router.push("/login");
     });
 
     return isAuthenticated ? <Component /> : null;

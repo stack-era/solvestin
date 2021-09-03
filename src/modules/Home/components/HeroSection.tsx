@@ -11,8 +11,8 @@ const HeroSection = () => {
       <div className="__text-cario flex justify-between items-center py-3 px-8 opacity-80 bg-[#141417]">
         <h1 className="font-bold text-3xl">Solvest.in</h1>
         <h6
-          className="text-sm mt-3 text-white bg-gradient-to-b from-[#8B4EEE]  to-[#B869CC] rounded px-3 py-2"
-          onClick={() => router.push("/dashboard")}
+          className="text-sm mt-3 text-white bg-gradient-to-b from-[#8B4EEE]  to-[#B869CC] rounded px-3 py-2 cursor-pointer"
+          onClick={() => router.push("/login")}
         >
           GET STARTED
         </h6>
