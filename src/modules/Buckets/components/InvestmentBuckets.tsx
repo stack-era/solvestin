@@ -51,9 +51,7 @@ const Buckets = () => {
                   }
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-lg">
-                      {token.name} {token.id}
-                    </h3>
+                    <h3 className="font-bold text-lg">{token.name}</h3>
                     <div className="  ">
                       <Image
                         src={RightArrow}
@@ -79,78 +77,6 @@ const Buckets = () => {
                   </div>
                 </div>
               ))}
-            {/* <div
-              className=" w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3 cursor-pointer"
-              onClick={() =>
-                router.push(
-                  `/tokens/${
-                    !isLoading && data.SOLBUCKS ? data.SOLBUCKS.id : 1
-                  }`
-                )
-              }
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-lg">SolBucks Token 2</h3>
-                <div className="  ">
-                  <Image
-                    src={RightArrow}
-                    alt="Dashboard Icon"
-                    width={18}
-                    height={18}
-                  />
-                </div>
-              </div>
-              <div className="flex items-baseline gap-2 my-3 ">
-                <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#FD6A3C] to-[#FF374E] font-bold text-3xl">
-                  $40.15
-                </h2>
-                <Image
-                  src={RedArrow}
-                  alt="Dashboard Icon"
-                  width={12}
-                  height={10}
-                />
-                <h5 className="text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-b from-[#FD6A3C] to-[#FF374E]">
-                  - 6.7%
-                </h5>
-              </div>
-            </div>
-            <div
-              className="  w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3 cursor-pointer"
-              onClick={() =>
-                router.push(
-                  `/tokens/${
-                    !isLoading && data.SOLBUCKS ? data.SOLBUCKS.id : 1
-                  }`
-                )
-              }
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-lg">SolBucks Token 3</h3>
-                <div className="  ">
-                  <Image
-                    src={RightArrow}
-                    alt="Dashboard Icon"
-                    width={18}
-                    height={18}
-                  />
-                </div>
-              </div>
-              <div className="flex items-baseline gap-2 my-3 ">
-                <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
-                  $252.15
-                </h2>
-                <Image
-                  src={GreenIcon}
-                  alt="Dashboard Icon"
-                  width={12}
-                  height={10}
-                />
-                <h5 className="text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A]">
-                  + 6.7%
-                </h5>
-              </div>
-            </div> */}
           </div>
         </div>
       </>
@@ -204,87 +130,6 @@ const Buckets = () => {
                   </div>
                 </div>
               ))}
-            {/* <div className=" w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3">
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-lg">Wrapped ETH</h3>
-                <div className="  ">
-                  <Image
-                    src={RightArrow}
-                    alt="Dashboard Icon"
-                    width={18}
-                    height={18}
-                  />
-                </div>
-              </div>
-              <div className="flex items-baseline gap-2 my-3 ">
-                <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
-                  $3,240.15
-                </h2>
-                <Image
-                  src={GreenIcon}
-                  alt="Dashboard Icon"
-                  width={12}
-                  height={10}
-                />
-                <h5 className="text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A]">
-                  + 6.7%
-                </h5>
-              </div>
-            </div>
-            <div className=" w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3">
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-lg">Serum</h3>
-                <div className="  ">
-                  <Image
-                    src={RightArrow}
-                    alt="Dashboard Icon"
-                    width={18}
-                    height={18}
-                  />
-                </div>
-              </div>
-              <div className="flex items-baseline gap-2 my-3 ">
-                <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#FD6A3C] to-[#FF374E] font-bold text-3xl">
-                  $6.37
-                </h2>
-                <Image
-                  src={RedArrow}
-                  alt="Dashboard Icon"
-                  width={12}
-                  height={10}
-                />
-                <h5 className="text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-b from-[#FD6A3C] to-[#FF374E]">
-                  - 6.7%
-                </h5>
-              </div>
-            </div>
-            <div className=" w-72 bg-gradient-to-br from-[#353c465e] to-[#15151500] rounded-xl border border-[#424244] p-3">
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-lg">SolDex Token 3</h3>
-                <div className="  ">
-                  <Image
-                    src={RightArrow}
-                    alt="Dashboard Icon"
-                    width={18}
-                    height={18}
-                  />
-                </div>
-              </div>
-              <div className="flex items-baseline gap-2 my-3 ">
-                <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A] font-bold text-3xl">
-                  $252.15
-                </h2>
-                <Image
-                  src={GreenIcon}
-                  alt="Dashboard Icon"
-                  width={12}
-                  height={10}
-                />
-                <h5 className="text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-b from-[#36DDAB] to-[#00D03A]">
-                  + 6.7%
-                </h5>
-              </div>
-            </div> */}
           </div>
         </div>
       </>
