@@ -24,7 +24,7 @@ const Chart = () => {
     labels: lables1,
     datasets: [
       {
-        label: "# of Votes",
+        label: "$ Value",
         data: performance,
         fill: false,
         backgroundColor: "#524EEE",
