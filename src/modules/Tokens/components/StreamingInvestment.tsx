@@ -199,7 +199,7 @@ const StreamingInvestment = () => {
           )}
         </button>
         <button
-          className="py-3 w-[74px] bg-gradient-to-b from-[#2ED872]  to-[#2DB1DB] rounded ring-1 ring-gray-200 font-bold relative"
+          className="py-3 w-[74px] bg-gradient-to-b from-[#00A3FF] via-[#5C8FFF] to-[#1F5AF0] rounded font-bold relative"
           onClick={() => setInterval(INTERVAL.WEEK)}
         >
           Week's

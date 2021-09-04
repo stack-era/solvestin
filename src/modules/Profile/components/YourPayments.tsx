@@ -13,7 +13,7 @@ const YourPayments = () => {
 
   const cancleStream = (id: any) => {
     axios
-      .get(`http://194.163.160.51:7000/api/stop_stream?streamId=${id}`)
+      .get(`https://solvest.in/api/stop_stream?streamId=${id}`)
       .then((response) => console.log(response.data.message));
   };
   return (

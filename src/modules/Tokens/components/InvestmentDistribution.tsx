@@ -58,45 +58,14 @@ const InvestmentDistribution = () => {
                   <td className="text-center"> {token.weight * 100}%</td>
                 </tr>
               ))}
-
-            {/* <tr className="bg-[#26262d33] font-bold ">
-              <td className="p-3">Chainlink (LINK)</td>
-              <td className="text-[#36DDAB] text-center">$12.24</td>
-              <td className="text-center"> 42.25%</td>
-            </tr>
-            <tr className="bg-[#232323] font-bold ">
-              <td className="p-3">Cardano (ADA)</td>
-              <td className="text-[#36DDAB] text-center">$12.15</td>
-              <td className="text-center"> 42.25%</td>
-            </tr>
-            <tr className="bg-[#26262d33] font-bold ">
-              <td className="p-3">Serum (SRM)</td>
-              <td className="text-[#36DDAB] text-center">$12.24</td>
-              <td className="text-center"> 42.25%</td>
-            </tr>
-            <tr className="bg-[#232323] font-bold ">
-              <td className="p-3">Raydium (RAY)</td>
-              <td className="text-[#FF374E] text-center">$72.15</td>
-              <td className="text-center"> 42.25%</td>
-            </tr>
-            <tr className="bg-[#26262d33] font-bold ">
-              <td className="p-3">Bonfida (FIDA)</td>
-              <td className="text-[#FF374E] text-center">$72.15</td>
-              <td className="text-center"> 42.25%</td>
-            </tr>
-            <tr className="bg-[#232323] font-bold ">
-              <td className="p-3">Oxygen Protocol (OXY)</td>
-              <td className="text-[#FF374E] text-center">$72.15</td>
-              <td className="text-center"> 42.25%</td>
-            </tr> */}
           </tbody>
         </table>
         <div className="flex gap-4 mb-10">
           <button className="rounded-lg text-black font-bold __text-cario text-xl capitalize bg-gradient-to-b from-[#36DDAB]  to-[#79E18A] p-2 w-[18rem] ">
-            BUY {!isLoading && data && data[0].symbol} 1
+            BUY {!isLoading && data && data[0].name}
           </button>
           <button className="rounded-lg text-black font-bold __text-cario text-xl capitalize bg-gradient-to-b from-[#DD5E36]  to-[#E17979] p-2 w-[18rem] ">
-            SEll {!isLoading && data && data[0].symbol} 1
+            SEll {!isLoading && data && data[0].name}
           </button>
         </div>
       </div>
