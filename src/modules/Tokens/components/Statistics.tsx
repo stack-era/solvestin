@@ -11,6 +11,7 @@ const Statistics = () => {
   let last24hrs;
   let addTotalChanges;
   let weeklyChange;
+  let NumberFormat = new Intl.NumberFormat("en-US");
 
   if (!isLoading && !error && data && data.data && data.data.length > 0) {
     const totalPrices = data.data.map(
@@ -48,7 +49,10 @@ const Statistics = () => {
             />
           </div>
           <h2 className="font-bold text-2xl ">
-            $ {!isLoading && sumOfPrices && sumOfPrices.toFixed(2)}
+            ${" "}
+            {!isLoading &&
+              sumOfPrices &&
+              NumberFormat.format(sumOfPrices.toFixed(2))}
           </h2>
         </div>
 
@@ -63,7 +67,9 @@ const Statistics = () => {
           </h2>
           <Image src={GreenIcon} alt="Dashboard Icon" width={22} height={20} />
           <h5 className="text-xl font-semibold">
-            +{addTotalChanges && addTotalChanges.toFixed(2)}%
+            +
+            {addTotalChanges && NumberFormat.format(addTotalChanges.toFixed(2))}
+            %
           </h5>
         </div>
 
@@ -90,7 +96,7 @@ const Statistics = () => {
               data &&
               data.data &&
               data.data.length > 0 &&
-              data.weekly[0].weekChange.toFixed(2)}
+              NumberFormat.format(data.weekly[0].weekChange.toFixed(2))}
             %
           </h5>
         </div>
